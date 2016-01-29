@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adrift;
+package adrift.team;
 
 import byui.cit260.adrift.model.*;
 
@@ -11,7 +11,7 @@ import byui.cit260.adrift.model.*;
  *
  * @author Philip
  */
-public class Adrift {
+public class AdriftTeam {
 
     /**
      * @param args the command line arguments
