@@ -17,16 +17,20 @@ public class AdriftTeam {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //TestRyansModules();
-        TestPhilipsModules();
-
-        // Player - Team
-        // Game - Ryan
-        // Ship - Ryan
+        
+        // Player - Team x
+        
+        TestRyansModules();
+        
+        // Game - Ryan x
+        // Ship - Ryan 
         // Robot - Ryan
         // InventoryItem - Ryan
         // Actor - Ryan
         // Map - Ryan
+        
+        //TestPhilipsModules();
+        
         // Buggy - Philip
         // Space Suite - Philip
         // Location - Philip
@@ -38,6 +42,22 @@ public class AdriftTeam {
 
     public static void TestRyansModules() {
         // Ryan puts his test code in here.
+        
+        //TestPlayer
+        Player player1 = new Player();
+        player1.setBestTime(42);
+        player1.setName("Ryan");
+        
+        String playerInfo = player1.toString();
+        System.out.println(playerInfo);
+        
+        //TestGame
+        Game game1 = new Game();
+        game1.setNumPeople(1);
+        game1.setTotalTime(100);
+        
+        String gameInfo = game1.toString();
+        System.out.println(gameInfo);
     }
 
     public static void TestPhilipsModules() {
