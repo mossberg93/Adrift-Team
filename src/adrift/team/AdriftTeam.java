@@ -23,7 +23,7 @@ public class AdriftTeam {
         TestRyansModules();
         
         // Game - Ryan x
-        // Ship - Ryan 
+        // Ship - Ryan x
         // Robot - Ryan
         // InventoryItem - Ryan
         // Actor - Ryan
@@ -58,7 +58,50 @@ public class AdriftTeam {
         
         String gameInfo = game1.toString();
         System.out.println(gameInfo);
-    }
+        
+        //TestShip
+        Ship ship1 = new Ship();
+        ship1.setDescription("This is the ship.");
+        ship1.setDamage(0);
+        
+        String shipInfo = ship1.toString();
+        System.out.println(shipInfo);
+        
+        //TestRobot
+        Robot robot1 = new Robot();
+        robot1.setDiamonds(1);
+        
+        String robotInfo = robot1.toString();
+        System.out.println(robotInfo);
+        
+        //TestInventory
+        Inventory inventory1 = new Inventory();
+        inventory1.setInventoryType("Personal Inventory");
+        inventory1.setQuantityInStock(1);
+        inventory1.setRequiredAmount(1);
+        
+        String inventoryInfo = inventory1.toString();
+        System.out.println(inventoryInfo);
+        
+        //TestActor
+        Actor actor1 = new Actor();
+        actor1.setAttribute("Male");
+        actor1.setCoordinates(55);
+        actor1.setDescription("This is you.");
+        actor1.setEnergy(100);
+        actor1.setName("You");
+        
+        String actorInfo = actor1.toString();
+        System.out.println(actorInfo);
+        
+        //TestMap
+        Map map1 = new Map();
+        map1.setColumnCount(5);
+        map1.setRowCount(5);
+        
+        String mapInfo = map1.toString();
+        System.out.println(mapInfo);
+    }   
 
     public static void TestPhilipsModules() {
 
