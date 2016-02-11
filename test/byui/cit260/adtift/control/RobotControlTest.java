@@ -308,4 +308,19 @@ public class RobotControlTest {
         // compare expected results with return value
         assertEquals(expResult, result, 0.0001);    
     }
+
+    /**
+     * Test of calculateFuel method, of class RobotControl.
+     */
+    @Test
+    public void testCalculateFuel() {
+        System.out.println("calculateFuel");
+        int destination = 0;
+        int inventoryItem = 0;
+        int amount = 0;
+        RobotControl instance = new RobotControl();
+        double expResult = 0.0;
+        double result = instance.calculateFuel(destination, inventoryItem, amount);
+        assertEquals(expResult, result, 0.0);
+    }
 }
