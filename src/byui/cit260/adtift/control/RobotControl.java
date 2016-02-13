@@ -57,7 +57,7 @@ public class RobotControl {
         return totalEnergy;
     }
     
-  public double calculateFuel(int destination, int inventoryItem, int amount) {
+  public double calculateFuel(int destination, int amount) {
       
       if (destination < 0) {
           return -1;

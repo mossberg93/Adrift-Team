@@ -315,12 +315,126 @@ public class RobotControlTest {
     @Test
     public void testCalculateFuel() {
         System.out.println("calculateFuel");
-        int destination = 0;
-        int inventoryItem = 0;
-        int amount = 0;
+        
+        /*********************
+         * Test Case #1
+         ********************/
+        System.out.println("\tTest case #1");
+        
+        //input values for test case 1
+        int destination = 5;
+        int amount = 10;
+        
+        double expResult = 55.0; //expected output returned value
+        
         RobotControl instance = new RobotControl();
-        double expResult = 0.0;
-        double result = instance.calculateFuel(destination, inventoryItem, amount);
-        assertEquals(expResult, result, 0.0);
+        
+        //call function to run test
+        double result = instance.calculateFuel(destination, amount);
+        
+        // compare expected return value with actual value returned
+        assertEquals(expResult, result, 0.0001);
+        
+        /*********************
+         * Test Case #2
+         ********************/
+        System.out.println("\tTest case #2");
+        
+        //input values for test case 1
+        destination = -1;
+        amount = 10;
+        
+        expResult = -1; //expected output returned value
+        
+        //call function to run test
+        result = instance.calculateFuel(destination, amount);
+        
+        // compare expected return value with actual value returned
+        assertEquals(expResult, result, 0.0001);
+        
+        /*********************
+         * Test Case #3
+         ********************/
+        System.out.println("\tTest case #3");
+        
+        //input values for test case 1
+        destination = 5;
+        amount = -1;
+        
+        expResult = -1; //expected output returned value
+        
+        //call function to run test
+        result = instance.calculateFuel(destination, amount);
+        
+        // compare expected return value with actual value returned
+        assertEquals(expResult, result, 0.0001);
+        
+        /*********************
+         * Test Case #4
+         ********************/
+        System.out.println("\tTest case #4");
+        
+        //input values for test case 1
+        destination = -1;
+        amount = -1;
+        
+        expResult = -1; //expected output returned value
+        
+        //call function to run test
+        result = instance.calculateFuel(destination, amount);
+        
+        // compare expected return value with actual value returned
+        assertEquals(expResult, result, 0.0001);
+        
+        /*********************
+         * Test Case #5
+         ********************/
+        System.out.println("\tTest case #5");
+        
+        //input values for test case 1
+        destination = 0;
+        amount = 10;
+        
+        expResult = 0; //expected output returned value
+        
+        //call function to run test
+        result = instance.calculateFuel(destination, amount);
+        
+        // compare expected return value with actual value returned
+        assertEquals(expResult, result, 0.0001);
+        
+        /*********************
+         * Test Case #6
+         ********************/
+        System.out.println("\tTest case #6");
+        
+        //input values for test case 1
+        destination = 5;
+        amount = 0;
+        
+        expResult = 5; //expected output returned value
+        
+        //call function to run test
+        result = instance.calculateFuel(destination, amount);
+        
+        // compare expected return value with actual value returned
+        assertEquals(expResult, result, 0.0001);
+        
+        /*********************
+         * Test Case #7
+         ********************/
+        System.out.println("\tTest case #7");
+        
+        //input values for test case 1
+        destination = 0;
+        amount = 0;
+        
+        expResult = 0; //expected output returned value
+        
+        //call function to run test
+        result = instance.calculateFuel(destination, amount);
+        
+        // compare expected return value with actual value returned
+        assertEquals(expResult, result, 0.0001);
     }
 }
