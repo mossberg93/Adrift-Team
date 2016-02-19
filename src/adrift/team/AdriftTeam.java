@@ -6,17 +6,44 @@
 package adrift.team;
 
 import byui.cit260.adrift.model.*;
+import citbyui.cit260.adrift.view.StartProgramView;
 
 /**
  *
  * @author Philip
  */
 public class AdriftTeam {
+    
+    private static Game currentGame = null;
+    private static Player player = null;
+
+    public static Game getCurrentGame() {
+        return currentGame;
+    }
+
+    public static void setCurrentGame(Game currentGame) {
+        AdriftTeam.currentGame = currentGame;
+    }
+
+    public static Player getPlayer() {
+        return player;
+    }
+
+    public static void setPlayer(Player player) {
+        AdriftTeam.player = player;
+    }
+   
+    
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        // create StartProgramViewOrig and display the start
+        // program view
+        StartProgramView startProgramView = new StartProgramView();
+        startProgramView.displayStartProgramView();
         
         // Player - Team x
         
