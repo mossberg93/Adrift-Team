@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package byui.cit260.adtift.control;
+package byui.cit260.adrift.control;
 
 /**
  *
  * @author Philip
  */
-public class ShipControl {
+public class HarvestControl {
     
 }

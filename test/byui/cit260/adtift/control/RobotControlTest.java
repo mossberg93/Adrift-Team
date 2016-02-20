@@ -5,6 +5,7 @@
  */
 package byui.cit260.adtift.control;
 
+import byui.cit260.adrift.control.RobotControl;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

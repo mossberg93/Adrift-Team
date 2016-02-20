@@ -6,6 +6,7 @@
 package adrift.team;
 
 import byui.cit260.adrift.model.*;
+import byui.cit260.adrift.view.*;
 
 /**
  *
@@ -18,29 +19,11 @@ public class AdriftTeam {
      */
     public static void main(String[] args) {
         
-        // Player - Team x
-        
-        TestRyansModules();
-        
-        // Game - Ryan x
-        // Ship - Ryan x
-        // Robot - Ryan
-        // InventoryItem - Ryan
-        // Actor - Ryan
-        // Map - Ryan
-        
-        //TestPhilipsModules();
-        
-        // Buggy - Philip
-        // Space Suite - Philip
-        // Location - Philip
-        // ResourceScene - Philip
-        // RegularScene - Philip
-        // NASABase - Philip
-        // Outpost - Philip
+       // testRyansModules();
+        testPhilipsModules();
     }
 
-    public static void TestRyansModules() {
+    public static void testRyansModules() {
         // Ryan puts his test code in here.
         
         //TestPlayer
@@ -103,59 +86,62 @@ public class AdriftTeam {
         System.out.println(mapInfo);
     }   
 
-    public static void TestPhilipsModules() {
-
-        // Test SpaceSuite
+    public static void testPhilipsModules() {
+        
+        MainMenuView mainMenu = new MainMenuView();
+        mainMenu.displayMainMenu();
+        
+        /*// Test SpaceSuite
         SpaceSuite spaceSuite1 = new SpaceSuite();
         spaceSuite1.setO2(5);
-
+        
         String spaceSuiteInfo = spaceSuite1.toString();
         System.out.println(spaceSuiteInfo);
-
+        
         // Test Buggy
         Buggy buggy1 = new Buggy();
         buggy1.setDescription("Space Buggy that transports resources.");
         buggy1.setFuel(2);
-
+        
         String buggyInfo = buggy1.toString();
         System.out.println(buggyInfo);
-
+        
         // Test Location
         Location location1 = new Location();
         location1.setRow(2);
         location1.setColumn(1);
         location1.setVisited(true);
         location1.setAmountRemaining(1.5);
-
+        
         String locationInfo = location1.toString();
         System.out.println(locationInfo);
-
+        
         // Test ResourceScene
         ResourceScene resourceScene1 = new ResourceScene();
         resourceScene1.setDescription("In front of you is a deep crater with "
-                + " tiny points that reflect light");
+        + " tiny points that reflect light");
         resourceScene1.setTravelTime(2.25);
         resourceScene1.setSymbol("A");
         resourceScene1.setAmountAvailable(3.5);
         resourceScene1.setResourceType("Diamond");
-
+        
         String resourceSceneInfo = resourceScene1.toString();
         System.out.println(resourceSceneInfo);
-
+        
         // Test RegularScene
         RegularScene regularScene1 = new RegularScene();
         regularScene1.setDescription("A barren astroid landscape stretches "
-                + "before you.");
+        + "before you.");
         regularScene1.setTravelTime(1);
         regularScene1.setSymbol("B");
-
+        
         String regularSceneInfo = regularScene1.toString();
         System.out.println(regularSceneInfo);
         
         // Test NASABase
         NASABase NASABase1 = new NASABase();
         NASABase1.setDescription("The gleaming white structure of the NASA "
-                + "Base is in front of you.");
+        + "Base is in front of you.");
         NASABase1.setTravelTime(3.5);
         NASABase1.setSymbol("F");
         NASABase1.setNumItems(5);
@@ -171,7 +157,11 @@ public class AdriftTeam {
         outpost1.setNumItems(3);
         
         String outpostInfo = outpost1.toString();
-        System.out.println(outpostInfo);
+        System.out.println(outpostInfo);*/
+    }
+
+    private static void displayMainMenuView() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

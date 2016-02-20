@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package byui.cit260.adtift.control;
+package byui.cit260.adrift.view;
 
 /**
  *
  * @author Philip
  */
-public class BuggyControl {
+public class GameMenuView {
+
+    void displayMenu() {
+        System.out.println("\n*** displayMenu stub function called ***");
+    }
     
 }
