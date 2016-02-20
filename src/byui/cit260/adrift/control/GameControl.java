@@ -12,8 +12,15 @@ import byui.cit260.adrift.model.Player;
  * @author Philip
  */
 public class GameControl {
+    
+    public static Player createPlayer(String playersName) {
+        
+        // create and save the player object
+        Player player = ProgramControl.createPlayer(playersName);
+        return player;
+    }    
 
-    public static void createNewGame(String player) {//Player player) {
+    public static void createNewGame(Player player) {
         System.out.println("\n*** createNewGame stub function called ***");
     }
 

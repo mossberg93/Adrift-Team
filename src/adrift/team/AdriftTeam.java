@@ -13,21 +13,43 @@ import byui.cit260.adrift.view.*;
  * @author Philip
  */
 public class AdriftTeam {
+    
+    private static Game currentGame = null;
+    private static Player player = null;
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         
-       // testRyansModules();
-        testPhilipsModules();
+        // create StartProgramViewOrig and display the start
+        // program view
+        StartProgramView startProgramView = new StartProgramView();
+        startProgramView.displayStartProgramView();
     }
+    
+    public static Game getCurrentGame() {
+        return currentGame;
+    }
+
+    public static void setCurrentGame(Game currentGame) {
+        AdriftTeam.currentGame = currentGame;
+    }
+
+    public static Player getPlayer() {
+        return player;
+    }
+
+    public static void setPlayer(Player player) {
+        AdriftTeam.player = player;
+    }
+       
 
     public static void testRyansModules() {
         // Ryan puts his test code in here.
         
         //TestPlayer
-        Player player1 = new Player();
+        /*Player player1 = new Player();
         player1.setBestTime(42);
         player1.setName("Ryan");
         
@@ -83,13 +105,13 @@ public class AdriftTeam {
         map1.setRowCount(5);
         
         String mapInfo = map1.toString();
-        System.out.println(mapInfo);
+        System.out.println(mapInfo);*/
     }   
 
     public static void testPhilipsModules() {
         
-        MainMenuView mainMenu = new MainMenuView();
-        mainMenu.displayMainMenu();
+        //MainMenuView mainMenu = new MainMenuView();
+        //mainMenu.displayMainMenu();
         
         /*// Test SpaceSuite
         SpaceSuite spaceSuite1 = new SpaceSuite();

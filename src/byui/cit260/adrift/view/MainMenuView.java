@@ -5,6 +5,7 @@
  */
 package byui.cit260.adrift.view;
 
+import adrift.team.AdriftTeam;
 import byui.cit260.adrift.control.*;
 import java.util.Scanner;
 
@@ -87,10 +88,10 @@ public class MainMenuView {
     }
 
     private void startNewGame() { // create a new game
-        GameControl.createNewGame("player"); // Adrift.getPlayer());
+        GameControl.createNewGame(AdriftTeam.getPlayer());
         
         GameMenuView gameMenu = new GameMenuView();
-        gameMenu.displayMenu();
+        gameMenu.displayGameMenu();
     }
 
     private void displayHelpMenu() {
@@ -110,6 +111,6 @@ public class MainMenuView {
         System.out.println("\n*** The Game loaded successfully ***");
         
         GameMenuView gameMenu = new GameMenuView();
-        gameMenu.displayMenu();
+        gameMenu.displayGameMenu();
     }
 }

@@ -11,8 +11,8 @@ package byui.cit260.adrift.view;
  */
 public class GameMenuView {
 
-    void displayMenu() {
-        System.out.println("\n*** displayMenu stub function called ***");
+    void displayGameMenu() {
+        System.out.println("\n*** displayGameMenu stub function called ***");
     }
     
 }
