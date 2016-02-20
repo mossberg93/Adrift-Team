@@ -181,9 +181,4 @@ public class AdriftTeam {
         String outpostInfo = outpost1.toString();
         System.out.println(outpostInfo);*/
     }
-
-    private static void displayMainMenuView() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }
