@@ -11,4 +11,18 @@ package byui.cit260.adrift.control;
  */
 public class MapControl {
     
+    public static String getLocation() {
+        System.out.println("Stub getLocation function called");
+        return "C5";
+    }    
+    
+    public static boolean validateLocation(String location) {
+        System.out.println("Stub validateLocation function called");
+        return true;
+    }  
+    
+    public static int calculateDistance(String mapLoc, String mapDest) {
+        System.out.println("Stub calculateDistance function called");
+        return 5;
+    }   
 }

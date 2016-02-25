@@ -11,7 +11,7 @@ package byui.cit260.adrift.control;
  */
 public class RobotControl {
     
-    public double calculateO2(int distance, int amount, int harvest, int buggy) {
+    public static double calculateO2(int distance, int amount, int harvest, int buggy) {
         
         if (distance < 0) {
             return -1;

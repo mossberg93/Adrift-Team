@@ -10,5 +10,10 @@ package byui.cit260.adrift.control;
  * @author Philip
  */
 public class SpaceSuitControl {
+
+    public static int getO2Amount() {
+        System.out.println("Stub getO2Amount function called");
+        return 5;
+    }
     
 }

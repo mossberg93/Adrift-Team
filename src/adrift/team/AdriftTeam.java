@@ -24,8 +24,11 @@ public class AdriftTeam {
         
         // create StartProgramViewOrig and display the start
         // program view
-        StartProgramView startProgramView = new StartProgramView();
-        startProgramView.displayStartProgramView();
+        //StartProgramView startProgramView = new StartProgramView();
+        //startProgramView.displayStartProgramView();
+        
+        //testRyanModules();
+        testPhilipsModules();
     }
     
     public static Game getCurrentGame() {
@@ -110,6 +113,12 @@ public class AdriftTeam {
 
     public static void testPhilipsModules() {
         
+        //PreMissionMenuView preMissionMenu = new PreMissionMenuView();
+        //preMissionMenu.displayPreMissionMenu();
+        
+        CalculateO2View calculateO2 = new CalculateO2View();
+        calculateO2.displayCalculateO2();
+
         //MainMenuView mainMenu = new MainMenuView();
         //mainMenu.displayMainMenu();
         
