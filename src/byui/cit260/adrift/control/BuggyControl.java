@@ -11,4 +11,9 @@ package byui.cit260.adrift.control;
  */
 public class BuggyControl {
     
+    private String getFuelAmount() {
+        System.out.println("\n*** getFuelCalculation() function called ***");
+        return "N";
+    }
+    
 }
