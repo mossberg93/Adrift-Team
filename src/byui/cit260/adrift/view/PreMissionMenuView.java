@@ -17,15 +17,15 @@ import java.util.HashMap;
 public class PreMissionMenuView extends View{
     
     private String inputError;
-    private String display;
+    private String message;
     private HashMap<String, Inventory> inventory;
         
     public PreMissionMenuView() {
         super();
         inventory = AdriftTeam.getInventory();
-        display = this.buildMenu(inventory);
+        message = this.buildMenu(inventory);
         
-        super.setDisplayMessage(display);
+        super.setDisplayMessage(message);
     }
 
     public boolean doAction (String input) {
@@ -70,8 +70,8 @@ public class PreMissionMenuView extends View{
         if (done) {
             this.displayNextView();
         } else {
-            display = this.buildMenu(inventory);
-            super.setDisplayMessage(display);
+            message = this.buildMenu(inventory);
+            super.setDisplayMessage(message);
         }
         
 

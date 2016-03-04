@@ -7,7 +7,6 @@ package byui.cit260.adrift.view;
 
 import adrift.team.AdriftTeam;
 import byui.cit260.adrift.control.*;
-import java.util.Scanner;
 
 /**
  *

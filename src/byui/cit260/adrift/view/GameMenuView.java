@@ -68,8 +68,8 @@ public class GameMenuView extends View {
                 break;
             case 'o':
                 System.out.println("Calc O2 chosen");
-                //CalculateO2View calculateO2 = new CalculateO2View();
-                //calculateO2.displayCalculateO2();                
+                CalculateO2View calculateO2 = new CalculateO2View();
+                calculateO2.display();                
                 break;                
             case 'c':
                 System.out.println("craft tools chosen");

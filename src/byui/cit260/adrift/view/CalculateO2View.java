@@ -8,136 +8,113 @@ package byui.cit260.adrift.view;
 import byui.cit260.adrift.control.MapControl;
 import byui.cit260.adrift.control.RobotControl;
 import byui.cit260.adrift.control.SpaceSuitControl;
-import java.util.Scanner;
 
 /**
  *
  * @author Philip
  */
-public class CalculateO2View {
+public class CalculateO2View extends View {
 
-    String inputError = null;
-    String prompt = null;
+    private int distance = 0;
+    private int amount = 0;
+    private int harvest = 0;
+    private int buggy = 0;
+    private String mapLoc = null;
+    private int question = 1;
+    String message;
+    String[] dialogue = {
+        "Enter your destination coordinates.",
+        "Will you be harvesting resources?"
+            + "\nY - Yes"
+            + "\nN - No",
+        "How much resources will you be harvesting?",
+        "Will you be taking the buggy?"
+            + "\nY - Yes"
+            + "\nN - No"
+    };
     
-    public void displayCalculateO2() {
-        
+    public CalculateO2View() {
+        super();
+        mapLoc = MapControl.getLocation();
         int O2Amount = SpaceSuitControl.getO2Amount();
-        int distance = 0;
-        int amount = 0;
-        int harvest = 0;
-        int buggy = 0;
-        String mapLoc = MapControl.getLocation();
-        String mapDest = null;
-        boolean valid = false;
-        
-        String displayInfo = "You're at map coordinates " + mapLoc + " and your O2 "
-                + "\nlevel is 3.";
-        
-        String destPrompt = "\nPlease enter the coordinates of your travel "
-                + "\ndestination?";
-        
-        prompt = displayInfo + destPrompt;
-        
-        while (!valid) {
-            String input = this.getInput();
-            valid = MapControl.validateLocation(input.toLowerCase());
-            mapDest = input;
-        }
-
-        distance = MapControl.calculateDistance(mapLoc, mapDest);
-        
-        valid = false;
-        prompt = "Will you be harvesting resources?"
-                + "\nY - Yes"
-                + "\nN - No";
-        
-        while (!valid) {
-            
-            String input = this.getInput();
-            char selection = input.toLowerCase().charAt(0);
-            
-            if (selection == 'y') {
-                harvest = 1;
-                valid = true;
-            } else if (selection == 'n') {
-                harvest = 0;
-                valid = true;
-            } else {
-                inputError = "Invalid value.  Please enter Y or N";
-            }
-                
-        }
-        
-        valid = false;
-        prompt = "How much resources will you be harvesting?";
-
-        while (!valid) {
-            
-            String input = this.getInput();
-            
-            try {
-                amount =  Integer.parseInt(input);
-                if (amount > 0) {
-                    valid = true;
-                }
-            } catch (NumberFormatException e){
-                inputError = "Invalid value. Please enter a number.";
-            }
-        }
-
-        valid = false;
-        prompt = "Will you be taking the buggy?"
-                + "\nY - Yes"
-                + "\nN - No";
-        
-        while (!valid) {
-            
-            String input = this.getInput();
-            char selection = input.toLowerCase().charAt(0);
-            
-            if (selection == 'y') {
-                buggy = 1;
-                valid = true;
-            } else if (selection == 'n') {
-                buggy = 0;
-                valid = true;
-            } else {
-                inputError = "Invalid value.  Please enter Y or N";
-            }
-                
-        }        
-            
-        double requiredO2 = RobotControl.calculateO2(distance, amount, harvest, buggy);
-        
-        System.out.println("You will require " + requiredO2 + " O2 for you journey.");
-          
+        message = "You're at map coordinates " + mapLoc + " and have "
+                + O2Amount + " units of O2. " + dialogue[0];
+        super.setDisplayMessage(message);
     }
+    
+    @Override
+    public boolean doAction (String input) {
         
-    private String getInput() {
-        Scanner keyboard = new Scanner(System.in); // get infile for keyboard
-        String value = ""; // value to be returned
-        boolean valid = false; // initialize to not valid
+        boolean valid = false;
+        boolean done = false;
+        char selection = input.toLowerCase().charAt(0);
+        
+        switch(question) {
+            case 1: // 1st response
+                valid = MapControl.validateLocation(input.toLowerCase());
+                if (!valid) {
+                    System.out.println("Input invalid: Enter a valid location.");
+                } else {
+                    String mapDest = input;
+                    distance = MapControl.calculateDistance(mapLoc, mapDest);
+                }
+                break;
+            case 2: // 2nd response
 
-        while (!valid) { 
-            
-            if (inputError != null) {
-                System.out.println(inputError);
-                inputError = null;
-            }  
-            
-            System.out.println("\n" + prompt);
+                if (selection == 'y' || selection == 'n') {
+                    // ternary expression if selection is y harvest is 1 otherwise it's 0
+                    if (selection == 'y') {
+                        harvest = 1;
+                     } 
+                    else {
+                        harvest = 0;
+                        question++; // need to skip to the next question
+                    }
+                    
+                    valid = true;
 
-            value = keyboard.nextLine(); // get next line typed on keyboard
-            value = value.trim(); // trim of leading and trailing blanks
+                } else {
+                    System.out.println("Input invalid: Please enter Y or N");
+                }
+                break;
+            case 3: // 3rd response
+                try {
+                    amount =  Integer.parseInt(input);
+                    if (amount > 0) {
+                       valid = true;
+                    }
+                    else {
+                        System.out.println("Input invalid: Enter a value > 0");
+                    }
+                } catch (NumberFormatException e){
+                    System.out.println("Input invalid: Enter a number.");
+                }
+                break;
+            case 4: // 4th response
+                
 
-            if (value.length() == 0) { // value is blank
-                inputError = "\nInvalid value, try again.";
-                continue;
-            }
-
-            break; // end the loop
+                if (selection == 'y' || selection == 'n') {
+                    // ternary expression if selection is y buggy is 1 otherwise it's 0
+                    buggy = (selection == 'y') ? 1 : 0; 
+                    done = true;
+                } else {
+                    System.out.println("Input invalid: Please enter Y or N");
+                }
+                break;
+          }
+        
+        if (valid) {
+            message = dialogue[question]; // get the next part of the dialogue
+            super.setDisplayMessage(message); // update the display message
+            question++; // advance to the next question
+        }
+        
+        if (done) {
+            double requiredO2 = RobotControl.calculateO2(distance, amount, harvest, buggy);
+            System.out.println("You will require " + requiredO2 + " units of O2 "
+                    + "for you journey.");
         }
 
-        return value;               
+        return done;
     }
 }

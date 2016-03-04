@@ -130,8 +130,8 @@ public class AdriftTeam {
         //PreMissionMenuView preMissionMenu = new PreMissionMenuView();
         //preMissionMenu.displayPreMissionMenu();
         
-        CalculateO2View calculateO2 = new CalculateO2View();
-        calculateO2.displayCalculateO2();
+        //CalculateO2View calculateO2 = new CalculateO2View();
+        //calculateO2.displayCalculateO2();
 
         //MainMenuView mainMenu = new MainMenuView();
         //mainMenu.displayMainMenu();

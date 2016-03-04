@@ -7,15 +7,12 @@ package byui.cit260.adrift.view;
 
 import byui.cit260.adrift.model.Player;
 import byui.cit260.adrift.control.GameControl;
-import java.util.Scanner;
 
 /**
  *
  * @author mossb
  */
 public class StartProgramView extends View {
-    
-    private String promptMessage;
     
     public StartProgramView() {
         

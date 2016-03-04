@@ -5,8 +5,6 @@
  */
 package byui.cit260.adrift.view;
 
-import java.util.Scanner;
-
 /**
  *
  * @author Philip
