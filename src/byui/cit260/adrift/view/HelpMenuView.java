@@ -11,11 +11,10 @@ import java.util.Scanner;
  *
  * @author Philip
  */
-public class HelpMenuView {
+public class HelpMenuView extends View{
 
-    private String promptMessage = "Enter an option";
-    
-    private final String MENU = "\n"
+    public HelpMenuView() {
+        super("\n"
             + "\n---------------------------------------"
             + "\n Help Menu                            |"
             + "\n---------------------------------------"
@@ -27,7 +26,10 @@ public class HelpMenuView {
             + "\nH - Harvest Resources"
             + "\nR - Repair the Ship"
             + "\nE - Exit"
-            + "\n---------------------------------------";    
+            + "\n---------------------------------------"
+            + "\n"
+            + "\nEnter an option: ");
+    }
     
     private final String GAME_GOAL = "\n"
         + "You’ve crash landed on an Asteroid and need to harvest resources, fix"
@@ -77,43 +79,13 @@ public class HelpMenuView {
         + "Select “Repair Ship” from the Game Menu while at your ship to repair "
         + "your ship.";
     
-    void displayHelpMenu() {
-        //System.out.println("\n*** diplayMenu() function called***");
+
+    @Override
+    public boolean doAction(String input) {
         
-        char selection = ' ';
-        do {
-            System.out.println(MENU);
-            
-            String input = this.getInput();
-            selection = input.toLowerCase().charAt(0);
-            
-            this.doAction(selection);
-        } while (selection != 'e');
-    }
-    
-    private String getInput() {
-        Scanner keyboard = new Scanner(System.in); // get infile for keyboard
-        String value = ""; // value to be returned
-        boolean valid = false; // initialize to not valid
-
-        while (!valid) { 
-            System.out.println("\n" + this.promptMessage);
-
-            value = keyboard.nextLine(); // get next line typed on keyboard
-            value = value.trim(); // trim of leading and trailing blanks
-
-            if (value.length() != 1) { // value is blank
-                System.out.println("\nInvalid value: value must be 1 charachter");
-                continue;
-            }
-
-            break; // end the loop
-        }
-
-        return value;               
-    }
-
-    private void doAction(char choice) {
+        boolean done = false;
+        char choice;
+        choice = input.toLowerCase().charAt(0);	
 
         switch(choice) {
             case 'g': // display GAME_GOAL
@@ -138,11 +110,13 @@ public class HelpMenuView {
                 System.out.println(this.REPAIR_SHIP);
                 break;  
             case 'e': // exit game
+                done = true;
                 break;                
             default:
                 System.out.println("\n*** Invalid selection *** Try again");
                 break;
         }
-    }    
-    
+        
+        return done;
+    }
 }

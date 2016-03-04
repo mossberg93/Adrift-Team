@@ -5,8 +5,8 @@
  */
 package byui.cit260.adrift.view;
 
+import adrift.team.AdriftTeam;
 import byui.cit260.adrift.control.InventoryControl;
-import java.util.Scanner;
 import byui.cit260.adrift.model.Inventory;
 import java.util.HashMap;
 
@@ -14,65 +14,25 @@ import java.util.HashMap;
  *
  * @author Philip
  */
-public class PreMissionMenuView {
+public class PreMissionMenuView extends View{
     
     private String inputError;
-    
-    public void displayPreMissionMenu() {
+    private String display;
+    private HashMap<String, Inventory> inventory;
         
-        // Eventually the inventory will be initilized in a better location
-        HashMap<String, Inventory> inventory = new HashMap();
-        InventoryControl.initilizeInventory(inventory);  
+    public PreMissionMenuView() {
+        super();
+        inventory = AdriftTeam.getInventory();
+        display = this.buildMenu(inventory);
         
-        String menu;
-        
-        char selection = ' ';
-        do {
-            
-            menu = this.buildMenu(inventory);
-            
-            System.out.println(menu);
-            
-            String input = this.getInput();
-            selection = input.toLowerCase().charAt(0);
-            
-            this.doAction(selection, inventory);
-            
-        } while (selection != 'e');
-    }
-        
-    private String getInput() {
-        Scanner keyboard = new Scanner(System.in); // get infile for keyboard
-        String value = ""; // value to be returned
-        String promptMessage = "You may select 3 mission supplies to bring with you."
-                + "\nSelecting an item again will remove it from the list. "
-                + "\nSelect a pre-mission supply> ";
-        boolean valid = false; // initialize to not valid
-
-        while (!valid) { 
-            
-            if (inputError != null) {
-                System.out.println(inputError);
-                inputError = null;
-            }  
-            
-            System.out.println("\n" + promptMessage);
-
-            value = keyboard.nextLine(); // get next line typed on keyboard
-            value = value.trim(); // trim of leading and trailing blanks
-
-            if (value.length() != 1) { // value is blank
-                inputError = "\nInvalid value: value must be 1 charachter";
-                continue;
-            }
-
-            break; // end the loop
-        }
-
-        return value;               
+        super.setDisplayMessage(display);
     }
 
-    private void doAction(char choice, HashMap<String, Inventory> inventory) {
+    public boolean doAction (String input) {
+        
+        boolean done = false;
+        char choice;
+        choice = input.toLowerCase().charAt(0);	
         
         switch(choice) {
             case 'r': // rations
@@ -94,11 +54,28 @@ public class PreMissionMenuView {
                 inputError = InventoryControl.adjustPreMissionSupplies("repairModule", inventory);
                 break;                
             case 'e': // done
+                done = true;                
                 break;
             default:
                 inputError = "Invalid selection: Try again";
                 break;
         }
+        
+        if (inputError != null) {
+            System.out.println(inputError);
+            inputError = null;
+        }  
+        
+        
+        if (done) {
+            this.displayNextView();
+        } else {
+            display = this.buildMenu(inventory);
+            super.setDisplayMessage(display);
+        }
+        
+
+        return done;
     }    
 
     private String buildMenu(HashMap<String, Inventory> inventory) {
@@ -114,8 +91,16 @@ public class PreMissionMenuView {
             + "\nF - " + inventory.get("fuel").getQuantityInStock() + " x  Fuel"
             + "\nM - " + inventory.get("repairModule").getQuantityInStock() + " x  Repair Module"
             + "\nE - Exit"
-            + "\n---------------------------------------";
+            + "\n---------------------------------------"
+            + "\nYou may select 3 mission supplies to bring with you."
+            + "\nSelecting an item again will remove it from the list."
+            + "\nSelect a pre-mission supply>";
         
         return menu;
+    }
+
+    private void displayNextView() {    
+        MainMenuView mainMenuView = new MainMenuView();
+        mainMenuView.display();
     }
 }

@@ -13,11 +13,10 @@ import java.util.Scanner;
  *
  * @author Philip
  */
-public class MainMenuView {
+public class MainMenuView extends View {
     
-    private String promptMessage = "Enter an action";
-    
-    private final String MENU = "\n"
+     public MainMenuView() {
+        super("\n"
             + "\n---------------------------------------"
             + "\n Main Menu                            |"
             + "\n---------------------------------------"
@@ -26,45 +25,17 @@ public class MainMenuView {
             + "\nS - Save Game"
             + "\nL - Load Game"
             + "\nE - Exit"
-            + "\n---------------------------------------";
-
-    public void displayMainMenu() {
-        //System.out.println("\n*** diplayMenu() function called***");
-        
-        char selection = ' ';
-        do {
-            System.out.println(MENU);
-            
-            String input = this.getInput();
-            selection = input.toLowerCase().charAt(0);
-            
-            this.doAction(selection);
-        } while (selection != 'e');
+            + "\n---------------------------------------"
+            + "\n"
+            + "\nEnter an action: ");
     }
+    
+    @Override
+    public boolean doAction(String input) {
         
-    private String getInput() {
-        Scanner keyboard = new Scanner(System.in); // get infile for keyboard
-        String value = ""; // value to be returned
-        boolean valid = false; // initialize to not valid
-
-        while (!valid) { 
-            System.out.println("\n" + this.promptMessage);
-
-            value = keyboard.nextLine(); // get next line typed on keyboard
-            value = value.trim(); // trim of leading and trailing blanks
-
-            if (value.length() != 1) { // value is blank
-                System.out.println("\nInvalid value: value must be 1 charachter");
-                continue;
-            }
-
-            break; // end the loop
-        }
-
-        return value;               
-    }
-
-    private void doAction(char choice) {
+        boolean done = false;
+        char choice;
+        choice = input.toLowerCase().charAt(0);		
         
         switch(choice) {
             case 'g': // create and start a new game
@@ -80,23 +51,26 @@ public class MainMenuView {
                 this.loadGame();
                 break;
             case 'e': // exit game
+                done = true;
                 break;
             default:
-                System.out.println("\n*** Invalid selection *** Try again");
+                System.out.println("\nInvalid selection: Try again");
                 break;
         }
+        
+        return done;
     }
 
     private void startNewGame() { // create a new game
         GameControl.createNewGame(AdriftTeam.getPlayer());
         
         GameMenuView gameMenu = new GameMenuView();
-        gameMenu.displayGameMenu();
+        gameMenu.display();
     }
 
     private void displayHelpMenu() {
         HelpMenuView helpMenu = new HelpMenuView();
-        helpMenu.displayHelpMenu();
+        helpMenu.display();
     }
 
     private void saveGame() {
@@ -111,6 +85,6 @@ public class MainMenuView {
         System.out.println("\n*** The Game loaded successfully ***");
         
         GameMenuView gameMenu = new GameMenuView();
-        gameMenu.displayGameMenu();
+        gameMenu.display();
     }
 }

@@ -5,12 +5,9 @@
  */
 package byui.cit260.adrift.view;
 
-import byui.cit260.adrift.control.InventoryControl;
 import byui.cit260.adrift.control.MapControl;
 import byui.cit260.adrift.control.RobotControl;
 import byui.cit260.adrift.control.SpaceSuitControl;
-import byui.cit260.adrift.model.Inventory;
-import java.util.HashMap;
 import java.util.Scanner;
 
 /**

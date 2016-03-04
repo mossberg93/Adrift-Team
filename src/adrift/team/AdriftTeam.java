@@ -5,8 +5,10 @@
  */
 package adrift.team;
 
+import byui.cit260.adrift.control.InventoryControl;
 import byui.cit260.adrift.model.*;
 import byui.cit260.adrift.view.*;
+import java.util.HashMap;
 
 /**
  *
@@ -16,19 +18,23 @@ public class AdriftTeam {
     
     private static Game currentGame = null;
     private static Player player = null;
+    private static HashMap<String, Inventory> inventory = new HashMap();
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+    
+        //Initilize inventory
+        InventoryControl.initilizeInventory(inventory);    
         
         // create StartProgramViewOrig and display the start
         // program view
-        //StartProgramView startProgramView = new StartProgramView();
-        //startProgramView.displayStartProgramView();
+        StartProgramView startProgramView = new StartProgramView();
+        startProgramView.display();
         
         //testRyanModules();
-        testPhilipsModules();
+        //testPhilipsModules();
     }
     
     public static Game getCurrentGame() {
@@ -46,6 +52,14 @@ public class AdriftTeam {
     public static void setPlayer(Player player) {
         AdriftTeam.player = player;
     }
+    
+    public static HashMap<String, Inventory> getInventory() {
+        return inventory;
+    }
+
+    public static void setInventory(HashMap<String, Inventory> inventory) {
+        AdriftTeam.inventory = inventory;
+    }    
        
 
     public static void testRyansModules() {
