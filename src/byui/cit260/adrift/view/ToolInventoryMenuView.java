@@ -11,11 +11,10 @@ import java.util.Scanner;
  *
  * @author mossb
  */
-public class ToolInventoryMenuView {
+public class ToolInventoryMenuView extends View {
     
-    private String promptMessage = "Enter an object.";
-    
-    private final String TOOLMENU = "\n"
+    public ToolInventoryMenuView () {
+        super("\n"
             + "\n------------------------------------------------------------"
             + "\n Tool Menu"
             + "\n------------------------------------------------------------"
@@ -25,44 +24,18 @@ public class ToolInventoryMenuView {
             + "\nT - Oxygen Tank"
             + "\nB - Buggy"
             + "\nQ - Quit"
-            + "\n------------------------------------------------------------";
-            
-    private void displayToolMenu() {
-        
-        char selection = ' ';
-        do {
-            System.out.println(TOOLMENU);
-            
-            String input = this.getInput();
-            selection = input.toLowerCase().charAt(0);
-            
-            this.doAction(selection);
-        } while (selection != 'e');
+            + "\n------------------------------------------------------------"
+            + "\nEnter an object.");
     }
 
-    private String getInput() {
-        Scanner keyboard = new Scanner(System.in);
-        String value = "";
-        boolean valid = false;
+    @Override
+    public boolean doAction(String input) {
         
-        while (!valid) {
-            System.out.println("\n + this.promptMessage");
-            
-            value = keyboard.nextLine();
-            value = value.trim();
-            
-            if (value.length() != 1) {
-                System.out.println("\nYou have entered an invalid value. Value must be 1 character.");
-                continue;
-            }
-            break;
-        }
-        return value;
-    }
-
-    private void doAction(char selection) {
+        boolean done = false;
+        char choice;
+        choice = input.toLowerCase().charAt(0);
         
-        switch(selection) {
+        switch(choice) {
            case 'd' : // equip mining drill
                 System.out.println("\nYou have equipped the mining drill.");
                 break;
@@ -78,10 +51,16 @@ public class ToolInventoryMenuView {
            case 'b' : // equip buggy
                System.out.println("\nYou have entered the buggy.");
                break;
-                       
+           case 'e' : // exit menu
+               System.out.println("\n Exited the menu");
+               done = true;
+               break;
+            default:
+                System.out.println("\nInvalid selection: Try again");
+                break;
         }
-            
-    }
-            
+       return done;     
+    
+    }            
     
 }

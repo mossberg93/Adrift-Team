@@ -34,7 +34,7 @@ public class RobotControl {
         return totalO2;
     }
 
-    public double calculateEnergy(int distance, int amount, int harvest, int buggy) {
+    public static double calculateEnergy(int distance, int amount, int harvest, int buggy) {
         
         if (distance < 0) {
             return -1;
@@ -57,7 +57,7 @@ public class RobotControl {
         return totalEnergy;
     }
     
-  public double calculateFuel(int destination, int amount) {
+  public static double calculateFuel(int destination, int amount) {
       
       if (destination < 0) {
           return -1;

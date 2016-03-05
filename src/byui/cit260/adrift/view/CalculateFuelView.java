@@ -5,24 +5,17 @@
  */
 package byui.cit260.adrift.view;
 
+import byui.cit260.adrift.control.RobotControl;
 import java.util.Scanner;
 
 /**
  *
  * @author mossb
  */
-public class CalculateFuelView {
+public class CalculateFuelView extends View {
     
-    public void displayCalculateFuelView() {
-        
-        boolean done = false;
-        do {
-            String calculateFuelOption = this.getFuelCaclulation();
-            if (calculateFuelOption.toUpperCase().equals("Q"))
-                return;
-            
-            done = this.doAction(calculateFuelOption);
-        } while (!done);
+    public CalculateFuelView() {
+        super("This is the function to calculate the amount of fuel needed");
     }
 
     private String getFuelCaclulation() {
@@ -30,29 +23,14 @@ public class CalculateFuelView {
         return "N";
     }
 
-    private boolean doAction(String calculateFuelOption) {
+    @Override
+    public boolean doAction(String calculateFuelOption) {
+        int destination = 0;
+        int amount = 0;
         System.out.println("\n*** doAction() function called ***");
+        double totalfuel = RobotControl.calculateFuel(destination, amount);
         return true;
     }
-    
-    public String getInput() {
-        Scanner keyboard = new Scanner(System.in);
-        boolean valid = false;
-        String selection = null;
-        
-        while (!valid) {
-            
-            selection = keyboard.nextLine();
-            selection = selection.trim();
-            
-            if (selection.length() < 1) {
-                System.out.println("\n*** Invalid selection. Please try again ***");
-                continue;
-            }
-            break;
-        }
-        return selection;
-    }
-    }
+}
     
 

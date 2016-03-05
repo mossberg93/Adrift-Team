@@ -5,6 +5,7 @@
  */
 package byui.cit260.adrift.view;
 
+
 /**
  *
  * @author Philip
@@ -65,6 +66,8 @@ public class GameMenuView extends View {
                 break;
             case 'f':
                 System.out.println("Calc fuel chosen");
+                CalculateFuelView calculateFuel = new CalculateFuelView();
+                calculateFuel.display(); 
                 break;
             case 'o':
                 System.out.println("Calc O2 chosen");
