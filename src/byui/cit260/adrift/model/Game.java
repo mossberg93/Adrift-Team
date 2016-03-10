@@ -15,6 +15,10 @@ public class Game implements Serializable{
     
     private double totalTime;
     private int numPeople;
+    private Ship ship;
+    private Map map;
+    private Actor actor;
+    private Player player;
 
     public Game() {
     }
@@ -34,6 +38,38 @@ public class Game implements Serializable{
     public void setNumPeople(int numPeople) {
         this.numPeople = numPeople;
     }
+    
+    public Ship getShip() {
+        return ship;
+    }
+
+    public void setShip(Ship ship) {
+        this.ship = ship;
+    }
+
+    public Map getMap() {
+        return map;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
+    }
+
+    public Actor getActor() {
+        return actor;
+    }
+
+    public void setActor(Actor actor) {
+        this.actor = actor;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }    
 
     @Override
     public int hashCode() {

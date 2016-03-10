@@ -5,23 +5,38 @@
  */
 package byui.cit260.adrift.control;
 
+import adrift.team.AdriftTeam;
+import byui.cit260.adrift.model.Game;
 import byui.cit260.adrift.model.Player;
+import byui.cit260.adrift.model.Ship;
 
 /**
  *
  * @author Philip
  */
 public class GameControl {
-    
+
     public static Player createPlayer(String playersName) {
-        
+
         // create and save the player object
         Player player = ProgramControl.createPlayer(playersName);
         return player;
-    }    
+    }
 
     public static void createNewGame(Player player) {
-        System.out.println("\n*** createNewGame stub function called ***");
+        Game game = new Game();
+        AdriftTeam.setPlayer(player);
+
+        game.setPlayer(player);
+
+        Ship ship = new Ship();
+        game.setShip(ship);
+
+        //Map map = MapControl.createMap();
+        //game.setMap(map);
+
+        //MapControl.moveActorsToStartingLocation(map);
+
     }
 
     public static void saveGame() {
@@ -31,5 +46,5 @@ public class GameControl {
     public static void loadGame() {
         System.out.println("\n*** loadGame stub function called ***");
     }
-    
+
 }

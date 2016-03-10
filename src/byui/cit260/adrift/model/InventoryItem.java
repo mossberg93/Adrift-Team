@@ -12,19 +12,19 @@ import java.util.Objects;
  *
  * @author mossb
  */
-public class Inventory implements Serializable {
+public class InventoryItem implements Serializable {
     private String inventoryType;
     private int quantityInStock;
     private int requiredAmount;
 
-    public Inventory() {
+    public InventoryItem() {
     }
 
-    public String getInventoryType() {
+    public String getType() {
         return inventoryType;
     }
 
-    public void setInventoryType(String inventoryType) {
+    public void setType(String inventoryType) {
         this.inventoryType = inventoryType;
     }
 
@@ -64,7 +64,7 @@ public class Inventory implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Inventory other = (Inventory) obj;
+        final InventoryItem other = (InventoryItem) obj;
         if (this.quantityInStock != other.quantityInStock) {
             return false;
         }
@@ -81,6 +81,6 @@ public class Inventory implements Serializable {
     public String toString() {
         return "Inventory{" + "inventoryType=" + inventoryType + ", quantityInStock=" + quantityInStock + ", requiredAmount=" + requiredAmount + '}';
     }
-    
-    
+
+
 }

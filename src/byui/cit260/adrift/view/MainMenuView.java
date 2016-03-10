@@ -13,7 +13,7 @@ import byui.cit260.adrift.control.*;
  * @author Philip
  */
 public class MainMenuView extends View {
-    
+
      public MainMenuView() {
         super("\n"
             + "\n---------------------------------------"
@@ -28,14 +28,14 @@ public class MainMenuView extends View {
             + "\n"
             + "\nEnter an action: ");
     }
-    
+
     @Override
     public boolean doAction(String input) {
-        
+
         boolean done = false;
         char choice;
-        choice = input.toLowerCase().charAt(0);		
-        
+        choice = input.toLowerCase().charAt(0);
+
         switch(choice) {
             case 'g': // create and start a new game
                 this.startNewGame();
@@ -56,13 +56,15 @@ public class MainMenuView extends View {
                 System.out.println("\nInvalid selection: Try again");
                 break;
         }
-        
+
         return done;
     }
 
-    private void startNewGame() { // create a new game
+    private void startNewGame() {
+        // create a new game
         GameControl.createNewGame(AdriftTeam.getPlayer());
-        
+
+        // display the game menu
         GameMenuView gameMenu = new GameMenuView();
         gameMenu.display();
     }
@@ -74,15 +76,15 @@ public class MainMenuView extends View {
 
     private void saveGame() {
         GameControl.saveGame();
-        
+
         System.out.println("\n*** The Game was successfully saved. ***");
     }
 
     private void loadGame() {
         GameControl.loadGame();
-        
+
         System.out.println("\n*** The Game loaded successfully ***");
-        
+
         GameMenuView gameMenu = new GameMenuView();
         gameMenu.display();
     }

@@ -17,6 +17,9 @@ public class Ship implements Serializable {
     private double damage;
 
     public Ship() {
+        this.description = "\nThis is your trusy space shipped.  It is damaged"
+            + "\nand must be reparid to get back home.";
+        damage = 4;
     }
 
     public String getDescription() {
@@ -68,6 +71,6 @@ public class Ship implements Serializable {
     public String toString() {
         return "Ship{" + "description=" + description + ", damage=" + damage + '}';
     }
-    
-    
+
+
 }
