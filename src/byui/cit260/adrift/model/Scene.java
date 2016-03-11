@@ -14,6 +14,15 @@ import java.util.Objects;
  */
 public class Scene implements Serializable {
 
+    private String type;
+    private String description;
+    private String resource;
+    private String mapSymbol;
+    private int amount;
+
+    public Scene() {
+    }
+
     public String getType() {
         return type;
     }
@@ -38,6 +47,14 @@ public class Scene implements Serializable {
         this.resource = resource;
     }
 
+    public String getMapSymbol() {
+        return mapSymbol;
+    }
+
+    public void setMapSymbol(String mapSymbol) {
+        this.mapSymbol = mapSymbol;
+    }
+
     public int getAmount() {
         return amount;
     }
@@ -49,10 +66,11 @@ public class Scene implements Serializable {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 73 * hash + Objects.hashCode(this.type);
-        hash = 73 * hash + Objects.hashCode(this.description);
-        hash = 73 * hash + Objects.hashCode(this.resource);
-        hash = 73 * hash + this.amount;
+        hash = 79 * hash + Objects.hashCode(this.type);
+        hash = 79 * hash + Objects.hashCode(this.description);
+        hash = 79 * hash + Objects.hashCode(this.resource);
+        hash = 79 * hash + Objects.hashCode(this.mapSymbol);
+        hash = 79 * hash + this.amount;
         return hash;
     }
 
@@ -74,37 +92,21 @@ public class Scene implements Serializable {
         if (!Objects.equals(this.type, other.type)) {
             return false;
         }
+        if (!Objects.equals(this.description, other.description)) {
+            return false;
+        }
         if (!Objects.equals(this.resource, other.resource)) {
+            return false;
+        }
+        if (!Objects.equals(this.mapSymbol, other.mapSymbol)) {
             return false;
         }
         return true;
     }
 
-    public Scene() {
-    }
-    private String type;
-    private String description;
-    private String resource;
-    private int amount;
-
-    public int getTravelTime() {
-        return travelTime;
+    @Override
+    public String toString() {
+        return "Scene{" + "type=" + type + ", description=" + description + ", resource=" + resource + ", mapSymbol=" + mapSymbol + ", amount=" + amount + '}';
     }
 
-    public void setTravelTime(int travelTime) {
-        this.travelTime = travelTime;
-    }
-    private int travelTime;
-
-    public String getMapSymbol() {
-        return mapSymbol;
-    }
-
-    public void setMapSymbol(String mapSymbol) {
-        this.mapSymbol = mapSymbol;
-    }
-    private String mapSymbol;
-    
-    
-    
 }

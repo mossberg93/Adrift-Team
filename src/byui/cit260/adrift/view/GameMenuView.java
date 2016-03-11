@@ -11,13 +11,13 @@ package byui.cit260.adrift.view;
  * @author Philip
  */
 public class GameMenuView extends View {
-    
+
     public GameMenuView() {
-        
+
         super("\n"
             + "\n---------------------------------------"
             + "\n Game Menu                            |"
-            + "\n---------------------------------------"			
+            + "\n---------------------------------------"
             + "\nM - Map"
             + "\nI - Inventory"
             + "\nS - Ship Status"
@@ -40,16 +40,17 @@ public class GameMenuView extends View {
 
     @Override
     public boolean doAction(String input) {
-        
+
         boolean done = false;
         char choice;
-        choice = input.toLowerCase().charAt(0);		
-        
+        choice = input.toLowerCase().charAt(0);
+
         switch(choice) {
             case 'm':
-                System.out.println("Display map chosen");
+                MapView mapView = new MapView();
+                mapView.displayMap();
                 break;
-            case 'i': 
+            case 'i':
                 System.out.println("Display inventory chosen");
                 break;
             case 's':
@@ -67,13 +68,13 @@ public class GameMenuView extends View {
             case 'f':
                 System.out.println("Calc fuel chosen");
                 CalculateFuelView calculateFuel = new CalculateFuelView();
-                calculateFuel.display(); 
+                calculateFuel.display();
                 break;
             case 'o':
                 System.out.println("Calc O2 chosen");
                 CalculateO2View calculateO2 = new CalculateO2View();
-                calculateO2.display();                
-                break;                
+                calculateO2.display();
+                break;
             case 'c':
                 System.out.println("craft tools chosen");
                 break;
@@ -96,18 +97,18 @@ public class GameMenuView extends View {
             case 'e':
                 System.out.println("Exit chosen");
                 done = true;
-                break;				
+                break;
             default:
                 System.out.println("\nInvalid selection: Try again");
                 break;
         }
-        
+
         return done;
-    }	
-    
+    }
+
     private void displayHelpMenu() {
         HelpMenuView helpMenu = new HelpMenuView();
         helpMenu.display();
-    }    
-    
+    }
+
 }

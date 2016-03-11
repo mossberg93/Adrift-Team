@@ -13,8 +13,11 @@ import java.util.Objects;
  * @author Ryan
  */
 public class Player implements Serializable {
-    
+
     private String name;
+    private String location;
+    private int energy;
+    private int O2;
     private double bestTime;
 
     public Player() {
@@ -27,6 +30,30 @@ public class Player implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+    
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public int getEnergy() {
+        return energy;
+    }
+
+    public void setEnergy(int energy) {
+        this.energy = energy;
+    }
+
+    public int getO2() {
+        return O2;
+    }
+
+    public void setO2(int O2) {
+        this.O2 = O2;
+    }
 
     public double getBestTime() {
         return bestTime;
@@ -38,8 +65,10 @@ public class Player implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 3;
         hash = 53 * hash + Objects.hashCode(this.name);
+        hash = 53 * hash + this.energy;
+        hash = 53 * hash + this.O2;
         hash = 53 * hash + (int) (Double.doubleToLongBits(this.bestTime) ^ (Double.doubleToLongBits(this.bestTime) >>> 32));
         return hash;
     }
@@ -56,6 +85,12 @@ public class Player implements Serializable {
             return false;
         }
         final Player other = (Player) obj;
+        if (this.energy != other.energy) {
+            return false;
+        }
+        if (this.O2 != other.O2) {
+            return false;
+        }
         if (Double.doubleToLongBits(this.bestTime) != Double.doubleToLongBits(other.bestTime)) {
             return false;
         }
@@ -67,9 +102,6 @@ public class Player implements Serializable {
 
     @Override
     public String toString() {
-        return "Player{" + "name=" + name + ", bestTime=" + bestTime + '}';
+        return "Player{" + "name=" + name + ", energy=" + energy + ", O2=" + O2 + ", bestTime=" + bestTime + '}';
     }
-    
-    
-    
 }

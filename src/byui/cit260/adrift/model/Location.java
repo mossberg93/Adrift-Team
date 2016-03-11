@@ -5,9 +5,7 @@
  */
 package byui.cit260.adrift.model;
 
-import byui.cit260.adrift.control.GameControl;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -19,9 +17,8 @@ public class Location implements Serializable {
     private int row;
     private int column;
     private boolean visited;
-    private Scene scene;
-    private ArrayList<Actor> actors;
     private double amountRemaining;
+    private Scene scene;
 
     public Location() {
     }
@@ -58,6 +55,14 @@ public class Location implements Serializable {
         this.amountRemaining = amountRemaining;
     }
 
+    public Scene getScene() {
+        return scene;
+    }
+
+    public void setScene(Scene scene) {
+        this.scene = scene;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -65,6 +70,7 @@ public class Location implements Serializable {
         hash = 47 * hash + this.column;
         hash = 47 * hash + (this.visited ? 1 : 0);
         hash = 47 * hash + (int) (Double.doubleToLongBits(this.amountRemaining) ^ (Double.doubleToLongBits(this.amountRemaining) >>> 32));
+        hash = 47 * hash + Objects.hashCode(this.scene);
         return hash;
     }
 
@@ -92,16 +98,14 @@ public class Location implements Serializable {
         if (Double.doubleToLongBits(this.amountRemaining) != Double.doubleToLongBits(other.amountRemaining)) {
             return false;
         }
+        if (!Objects.equals(this.scene, other.scene)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Location{" + "row=" + row + ", column=" + column + ", visited=" + visited + ", amountRemaining=" + amountRemaining + '}';
+        return "Location{" + "row=" + row + ", column=" + column + ", visited=" + visited + ", amountRemaining=" + amountRemaining + ", scene=" + scene + '}';
     }
-
-    public void setScene(Scene scene) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }
