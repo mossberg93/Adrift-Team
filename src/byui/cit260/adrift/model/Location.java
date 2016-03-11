@@ -5,7 +5,9 @@
  */
 package byui.cit260.adrift.model;
 
+import byui.cit260.adrift.control.GameControl;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -17,6 +19,8 @@ public class Location implements Serializable {
     private int row;
     private int column;
     private boolean visited;
+    private Scene scene;
+    private ArrayList<Actor> actors;
     private double amountRemaining;
 
     public Location() {
@@ -94,6 +98,10 @@ public class Location implements Serializable {
     @Override
     public String toString() {
         return "Location{" + "row=" + row + ", column=" + column + ", visited=" + visited + ", amountRemaining=" + amountRemaining + '}';
+    }
+
+    public void setScene(Scene scene) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
