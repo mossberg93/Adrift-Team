@@ -6,14 +6,13 @@
 package byui.cit260.adrift.view;
 
 import byui.cit260.adrift.control.RobotControl;
-import java.util.Scanner;
 
 /**
  *
  * @author mossb
  */
 public class CalculateFuelView extends View {
-    
+
     public CalculateFuelView() {
         super("This is the function to calculate the amount of fuel needed");
     }
@@ -32,5 +31,5 @@ public class CalculateFuelView extends View {
         return true;
     }
 }
-    
+
 

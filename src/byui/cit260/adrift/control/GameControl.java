@@ -7,6 +7,7 @@ package byui.cit260.adrift.control;
 
 import adrift.team.AdriftTeam;
 import byui.cit260.adrift.model.Game;
+import byui.cit260.adrift.model.InventoryItem;
 import byui.cit260.adrift.model.Map;
 import byui.cit260.adrift.model.Player;
 import byui.cit260.adrift.model.Ship;
@@ -17,17 +18,18 @@ import byui.cit260.adrift.model.Ship;
  */
 public class GameControl {
 
-    public static Player createPlayer(String playersName) {
+    public static Player createPlayer(String name) {
 
-        // create and save the player object
-        Player player = ProgramControl.createPlayer(playersName);
+        Player player = new Player();
+        player.setName(name);
+
+        AdriftTeam.setPlayer(player);
+
         return player;
     }
 
     public static void createNewGame(Player player) {
         Game game = new Game();
-        AdriftTeam.setPlayer(player);
-        AdriftTeam.setCurrentGame(game);
 
         game.setPlayer(player);
 
@@ -36,6 +38,12 @@ public class GameControl {
 
         Map map = MapControl.createMap();
         game.setMap(map);
+
+        InventoryItem[] inventory;
+        inventory = InventoryControl.initilizeInventory(); //Initilize inventory
+        game.setInventory(inventory);
+
+        AdriftTeam.setGame(game);
 
         moveToLocation("C3");
     }
@@ -50,28 +58,10 @@ public class GameControl {
 
     private static void moveToLocation(String location) {
 
-        char rowLetter = location.charAt(0);
-        int row;
-        int column = Character.getNumericValue(location.charAt(1)) + 1;
-
-        switch(rowLetter) {
-           case 'a' :
-                row = MapControl.RowLetter.A.ordinal();
-                break;
-           case 'b' :
-                row = MapControl.RowLetter.B.ordinal();
-                break;
-           case 'c' :
-                row = MapControl.RowLetter.C.ordinal();
-                break;
-           case 'd' :
-                row = MapControl.RowLetter.D.ordinal();
-                break;
-           case 'e' :
-                row = MapControl.RowLetter.E.ordinal();
-                break;
+        boolean valid = MapControl.validateLocation(location);
+        if (valid) {
+            AdriftTeam.getGame().getPlayer().setLocation(location);
+            MapControl.setLocationVisited(location);
         }
-
-        AdriftTeam.getPlayer().setLocation(location);
     }
 }

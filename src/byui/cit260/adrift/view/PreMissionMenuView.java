@@ -17,16 +17,14 @@ public class PreMissionMenuView extends View{
 
     private String inputError;
     private String message;
-    private InventoryItem[] inventory;
 
     public PreMissionMenuView() {
         super();
-        inventory = AdriftTeam.getInventory();
-        message = this.buildMenu(inventory);
-
+        message = this.buildMenu();
         super.setDisplayMessage(message);
     }
 
+    @Override
     public boolean doAction (String input) {
 
         boolean done = false;
@@ -35,22 +33,22 @@ public class PreMissionMenuView extends View{
 
         switch(choice) {
             case 'r': // rations
-                inputError = InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.food.ordinal(), inventory);
+                inputError = InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.food.ordinal());
                 break;
             case 'w': // water
-                inputError = InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.water.ordinal(), inventory);
+                inputError = InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.water.ordinal());
                 break;
             case 't': // o2Tank
-                inputError = InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.o2Tank.ordinal(), inventory);
+                inputError = InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.o2Tank.ordinal());
                 break;
             case 'd': // drill
-                inputError = InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.drill.ordinal(), inventory);
+                inputError = InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.drill.ordinal());
                 break;
             case 'f': // fuel
-                inputError = InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.fuel.ordinal(), inventory);
+                inputError = InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.fuel.ordinal());
                 break;
             case 'm': // repairModule
-                inputError = InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.repairModule.ordinal(), inventory);
+                inputError = InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.repairModule.ordinal());
                 break;
             case 'e': // done
                 done = true;
@@ -69,7 +67,7 @@ public class PreMissionMenuView extends View{
         if (done) {
             this.displayNextView();
         } else {
-            message = this.buildMenu(inventory);
+            message = this.buildMenu();
             super.setDisplayMessage(message);
         }
 
@@ -77,7 +75,9 @@ public class PreMissionMenuView extends View{
         return done;
     }
 
-    private String buildMenu(InventoryItem[] inventory) {
+    private String buildMenu() {
+
+        InventoryItem[] inventory = AdriftTeam.getGame().getInventory();
 
         String menu = "\n"
             + "\n---------------------------------------"
@@ -99,7 +99,7 @@ public class PreMissionMenuView extends View{
     }
 
     private void displayNextView() {
-        MainMenuView mainMenuView = new MainMenuView();
-        mainMenuView.display();
+        GameMenuView gameMenu = new GameMenuView();
+        gameMenu.display();
     }
 }

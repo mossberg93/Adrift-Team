@@ -5,6 +5,8 @@
  */
 package byui.cit260.adrift.view;
 
+import byui.cit260.adrift.control.MapControl;
+
 
 /**
  *
@@ -31,6 +33,7 @@ public class GameMenuView extends View {
             + "\nD - Deliver Resource"
             + "\nP - Repair Ship"
             + "\nL - Launch Ship"
+            + "\nU - Map Statistics"
             + "\nH - Help Menu"
             + "\nE - Exit"
             + "\n---------------------------------------"
@@ -89,6 +92,10 @@ public class GameMenuView extends View {
                 break;
             case 'l':
                 System.out.println("Launch ship chosen");
+                break;
+            case 'u':
+                String ueScences = MapControl.getMapStats();
+                System.out.println(ueScences);
                 break;
             case 'h':
                 System.out.println("Help menu chosen");

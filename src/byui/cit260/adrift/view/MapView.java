@@ -21,15 +21,17 @@ public class MapView {
     }
 
     public void displayMap() {
-        Map map = AdriftTeam.getCurrentGame().getMap();
+        Map map = AdriftTeam.getGame().getMap();
         String keySeperator = "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^";
         String rowSeperator = "--------------------------";
         String colSeperator = "|";
         String keyDisplay;
-        String mapDisplay = rowSeperator;
-        String playerLoc = AdriftTeam.getPlayer().getLocation();
+        String mapDisplay;
+        String playerLoc = AdriftTeam.getGame().getPlayer().getLocation();
 
         keyDisplay = keySeperator
+            + "\nMap Key"
+            + "\n" + keySeperator
             + "\nAM = Aluminum Mine \t IM = Iron Mine"
             + "\nAP = Asteroid Plain \t NB = NASA Base"
             + "\nCP = Copper Mine \t OP = Outpost"
@@ -37,6 +39,10 @@ public class MapView {
             + "\nIF = Ice Field \t\t UE = Unexplored"
             + "\n* indicates current location"
             + "\n" + keySeperator;
+
+        mapDisplay = rowSeperator
+            + "\nAsteroid Map"
+            + "\n" + rowSeperator;
 
         Location[][] locations = map.getLocations();
 

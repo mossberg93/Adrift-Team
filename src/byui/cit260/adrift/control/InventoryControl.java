@@ -5,6 +5,7 @@
  */
 package byui.cit260.adrift.control;
 
+import adrift.team.AdriftTeam;
 import byui.cit260.adrift.model.InventoryItem;
 
 /**
@@ -44,8 +45,9 @@ public class InventoryControl {
         return inventory;
     }
 
-    public static String adjustPreMissionSupplies(int index, InventoryItem[] inventory) {
+    public static String adjustPreMissionSupplies(int index) {
 
+        InventoryItem[] inventory = AdriftTeam.getGame().getInventory();
         int amount = inventory[index].getQuantityInStock();
         int inventoryTotal = 0;
 

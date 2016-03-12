@@ -65,8 +65,8 @@ public class MainMenuView extends View {
         GameControl.createNewGame(AdriftTeam.getPlayer());
 
         // display the game menu
-        GameMenuView gameMenu = new GameMenuView();
-        gameMenu.display();
+        PreMissionMenuView preMissionMenu = new PreMissionMenuView();
+        preMissionMenu.display();
     }
 
     private void displayHelpMenu() {

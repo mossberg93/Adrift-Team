@@ -5,14 +5,12 @@
  */
 package byui.cit260.adrift.view;
 
-import java.util.Scanner;
-
 /**
  *
  * @author mossb
  */
 public class ToolInventoryMenuView extends View {
-    
+
     public ToolInventoryMenuView () {
         super("\n"
             + "\n------------------------------------------------------------"
@@ -30,11 +28,11 @@ public class ToolInventoryMenuView extends View {
 
     @Override
     public boolean doAction(String input) {
-        
+
         boolean done = false;
         char choice;
         choice = input.toLowerCase().charAt(0);
-        
+
         switch(choice) {
            case 'd' : // equip mining drill
                 System.out.println("\nYou have equipped the mining drill.");
@@ -59,8 +57,8 @@ public class ToolInventoryMenuView extends View {
                 System.out.println("\nInvalid selection: Try again");
                 break;
         }
-       return done;     
-    
-    }            
-    
+       return done;
+
+    }
+
 }

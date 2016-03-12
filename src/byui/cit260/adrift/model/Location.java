@@ -17,7 +17,7 @@ public class Location implements Serializable {
     private int row;
     private int column;
     private boolean visited;
-    private double amountRemaining;
+    private int amountRemaining;
     private Scene scene;
 
     public Location() {
@@ -47,11 +47,11 @@ public class Location implements Serializable {
         this.visited = visited;
     }
 
-    public double getAmountRemaining() {
+    public int getAmountRemaining() {
         return amountRemaining;
     }
 
-    public void setAmountRemaining(double amountRemaining) {
+    public void setAmountRemaining(int amountRemaining) {
         this.amountRemaining = amountRemaining;
     }
 
