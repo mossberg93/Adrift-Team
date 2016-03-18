@@ -6,6 +6,7 @@
 package byui.cit260.adrift.control;
 
 import adrift.team.AdriftTeam;
+import byui.cit260.adrift.exceptions.MapControlException;
 import byui.cit260.adrift.model.Game;
 import byui.cit260.adrift.model.InventoryItem;
 import byui.cit260.adrift.model.Map;
@@ -28,7 +29,7 @@ public class GameControl {
         return player;
     }
 
-    public static void createNewGame(Player player) {
+    public static void createNewGame(Player player) throws MapControlException {
         Game game = new Game();
 
         game.setPlayer(player);
@@ -56,12 +57,12 @@ public class GameControl {
         System.out.println("\n*** loadGame stub function called ***");
     }
 
-    private static void moveToLocation(String location) {
+    private static void moveToLocation (String location) throws MapControlException {
 
-        boolean valid = MapControl.validateLocation(location);
-        if (valid) {
-            AdriftTeam.getGame().getPlayer().setLocation(location);
-            MapControl.setLocationVisited(location);
-        }
+        MapControl.validateLocation(location);
+
+        AdriftTeam.getGame().getPlayer().setLocation(location);
+        MapControl.setLocationVisited(location);
+
     }
 }

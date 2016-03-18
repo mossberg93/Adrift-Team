@@ -7,6 +7,9 @@ package byui.cit260.adrift.view;
 
 import adrift.team.AdriftTeam;
 import byui.cit260.adrift.control.*;
+import byui.cit260.adrift.exceptions.MapControlException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -61,8 +64,12 @@ public class MainMenuView extends View {
     }
 
     private void startNewGame() {
-        // create a new game
-        GameControl.createNewGame(AdriftTeam.getPlayer());
+         try {
+             // create a new game
+             GameControl.createNewGame(AdriftTeam.getPlayer());
+         } catch (MapControlException ex) {
+             System.out.println(ex.getMessage());
+         }
 
         // display the game menu
         PreMissionMenuView preMissionMenu = new PreMissionMenuView();

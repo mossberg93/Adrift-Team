@@ -24,7 +24,13 @@ public class AdriftTeam {
         // create StartProgramViewOrig and display the start
         // program view
         StartProgramView startProgramView = new StartProgramView();
-        startProgramView.display();
+        try {
+            startProgramView.display();
+        } catch (Throwable te) {
+            System.out.println(te.getMessage());
+            te.printStackTrace();
+            startProgramView.display();
+        }
     }
 
     public static Player getPlayer() {

@@ -6,6 +6,7 @@
 package byui.cit260.adrift.control;
 
 import adrift.team.AdriftTeam;
+import byui.cit260.adrift.exceptions.MapControlException;
 import byui.cit260.adrift.model.Game;
 import byui.cit260.adrift.model.Location;
 import byui.cit260.adrift.model.Map;
@@ -93,21 +94,19 @@ public class MapControl {
         E
     }
 
-    public static boolean validateLocation(String location) {
+    public static void validateLocation(String location) throws MapControlException {
 
-        boolean valid = false;
         Location[][] locations = AdriftTeam.getGame().getMap().getLocations();
         int row = MapControl.getRowFromLocation(location);
         int col = MapControl.getColFromLocation(location);
 
         // check if row is a valid index
-        if ((row >= 0) && (row < locations.length)) {
-            // check if col is a valid index
-            if ((col >= 0) && (col < locations[row].length)) {
-                valid = true;
-            }
+        if (row < 0 || row >= locations.length ||
+            col < 0 || col >= locations[row].length) {
+
+            throw new MapControlException("Location " + location + " is "
+                + "invalid because it's outside the bounds of the map.");
         }
-        return valid;
     }
 
     public static int calculateDistance(String startLoc, String destLoc) {

@@ -9,6 +9,9 @@ import adrift.team.AdriftTeam;
 import byui.cit260.adrift.control.MapControl;
 import byui.cit260.adrift.control.RobotControl;
 import byui.cit260.adrift.control.SpaceSuitControl;
+import byui.cit260.adrift.exceptions.MapControlException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -52,14 +55,17 @@ public class CalculateO2View extends View {
         char selection = input.toLowerCase().charAt(0);
 
         switch(question) {
-            case 1: // 1st response
-                valid = MapControl.validateLocation(input.toLowerCase());
-                if (!valid) {
-                    System.out.println("Input invalid: Enter a valid location.");
-                } else {
+            case 1:
+
+                try {
+                    MapControl.validateLocation(input.toLowerCase());
                     String mapDest = input;
                     distance = MapControl.calculateDistance(mapLoc, mapDest);
+                    valid = true;
+                } catch (MapControlException ex) {
+                    System.out.println(ex.getMessage());
                 }
+
                 break;
             case 2: // 2nd response
 
@@ -81,15 +87,17 @@ public class CalculateO2View extends View {
             case 3: // 3rd response
                 try {
                     amount =  Integer.parseInt(input);
-                    if (amount > 0) {
-                       valid = true;
-                    }
-                    else {
-                        System.out.println("Input invalid: Enter a value > 0");
-                    }
                 } catch (NumberFormatException e){
                     System.out.println("Input invalid: Enter a number.");
                 }
+
+                if (amount > 0) {
+                   valid = true;
+                }
+                else {
+                    System.out.println("Input invalid: Enter a value > 0");
+                }
+
                 break;
             case 4: // 4th response
 
