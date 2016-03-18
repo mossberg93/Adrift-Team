@@ -46,7 +46,7 @@ public class GameControl {
 
         AdriftTeam.setGame(game);
 
-        moveToLocation("C3");
+        moveToLocation("c3");
     }
 
     public static void saveGame() {
@@ -57,7 +57,7 @@ public class GameControl {
         System.out.println("\n*** loadGame stub function called ***");
     }
 
-    private static void moveToLocation (String location) throws MapControlException {
+    public static void moveToLocation (String location) throws MapControlException {
 
         MapControl.validateLocation(location);
 

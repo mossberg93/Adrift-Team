@@ -7,6 +7,7 @@ package byui.cit260.adrift.view;
 
 import adrift.team.AdriftTeam;
 import byui.cit260.adrift.control.InventoryControl;
+import byui.cit260.adrift.exceptions.InventoryControlException;
 import byui.cit260.adrift.model.InventoryItem;
 
 /**
@@ -15,7 +16,6 @@ import byui.cit260.adrift.model.InventoryItem;
  */
 public class PreMissionMenuView extends View{
 
-    private String inputError;
     private String message;
 
     public PreMissionMenuView() {
@@ -31,38 +31,36 @@ public class PreMissionMenuView extends View{
         char choice;
         choice = input.toLowerCase().charAt(0);
 
-        switch(choice) {
-            case 'r': // rations
-                inputError = InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.food.ordinal());
-                break;
-            case 'w': // water
-                inputError = InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.water.ordinal());
-                break;
-            case 't': // o2Tank
-                inputError = InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.o2Tank.ordinal());
-                break;
-            case 'd': // drill
-                inputError = InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.drill.ordinal());
-                break;
-            case 'f': // fuel
-                inputError = InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.fuel.ordinal());
-                break;
-            case 'm': // repairModule
-                inputError = InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.repairModule.ordinal());
-                break;
-            case 'e': // done
-                done = true;
-                break;
-            default:
-                inputError = "Invalid selection: Try again";
-                break;
+        try {
+            switch (choice) {
+                case 'r': // rations
+                    InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.food.ordinal());
+                    break;
+                case 'w': // water
+                    InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.water.ordinal());
+                    break;
+                case 't': // o2Tank
+                    InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.o2Tank.ordinal());
+                    break;
+                case 'd': // drill
+                    InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.drill.ordinal());
+                    break;
+                case 'f': // fuel
+                    InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.fuel.ordinal());
+                    break;
+                case 'm': // repairModule
+                    InventoryControl.adjustPreMissionSupplies(InventoryControl.Types.repairModule.ordinal());
+                    break;
+                case 'e': // done
+                    done = true;
+                    break;
+                default:
+                    System.out.println("Invalid selection: Try again");
+                    break;
+            }
+        } catch (InventoryControlException ie) {
+            System.out.println(ie.getMessage());
         }
-
-        if (inputError != null) {
-            System.out.println(inputError);
-            inputError = null;
-        }
-
 
         if (done) {
             this.displayNextView();

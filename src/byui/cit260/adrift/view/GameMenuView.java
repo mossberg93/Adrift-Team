@@ -5,7 +5,11 @@
  */
 package byui.cit260.adrift.view;
 
+import byui.cit260.adrift.control.GameControl;
 import byui.cit260.adrift.control.MapControl;
+import byui.cit260.adrift.exceptions.MapControlException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -63,7 +67,7 @@ public class GameMenuView extends View {
                 System.out.println("Explore location chosen");
                 break;
             case 'v':
-                System.out.println("Move chosen");
+                this.movePlayer();
                 break;
             case 'g':
                 System.out.println("Calc energy chosen");
@@ -116,6 +120,32 @@ public class GameMenuView extends View {
     private void displayHelpMenu() {
         HelpMenuView helpMenu = new HelpMenuView();
         helpMenu.display();
+    }
+
+    private void movePlayer() {
+
+        MapView mapView = new MapView();
+        mapView.displayMap();
+        System.out.println("\nPlease selct a map location (e.g. B2) to "
+            + "move to.");
+        String input = super.getInput().toLowerCase();
+
+        while (input.length() != 2) {
+
+            mapView.displayMap();
+            System.out.println("\nInvalid selection: Please selct a valid map"
+                + " location (e.g. B2) to move to.");
+
+            input = super.getInput();
+        }
+
+        try {
+            GameControl.moveToLocation(input);
+        } catch (MapControlException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println("\nYou were not moved as an invalid location "
+                + "was selected.");
+        }
     }
 
 }

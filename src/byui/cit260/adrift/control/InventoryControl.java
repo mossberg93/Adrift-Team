@@ -6,6 +6,7 @@
 package byui.cit260.adrift.control;
 
 import adrift.team.AdriftTeam;
+import byui.cit260.adrift.exceptions.InventoryControlException;
 import byui.cit260.adrift.model.InventoryItem;
 
 /**
@@ -45,7 +46,7 @@ public class InventoryControl {
         return inventory;
     }
 
-    public static String adjustPreMissionSupplies(int index) {
+    public static void adjustPreMissionSupplies(int index) throws InventoryControlException {
 
         InventoryItem[] inventory = AdriftTeam.getGame().getInventory();
         int amount = inventory[index].getQuantityInStock();
@@ -66,7 +67,8 @@ public class InventoryControl {
         if (amount == 0) {
 
             if (inventoryTotal == 3) {
-                return "Invalid selection: 3 items have already been chosen.";
+                throw new InventoryControlException("Invalid selection: 3 items"
+                    + " have already been chosen.");
             }
 
             inventory[index].setQuantityInStock(1);
@@ -74,7 +76,5 @@ public class InventoryControl {
         else {
             inventory[index].setQuantityInStock(0);
         }
-
-        return null;
     }
 }

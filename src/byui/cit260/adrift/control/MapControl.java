@@ -161,7 +161,7 @@ public class MapControl {
 
     public static int getRowFromLocation(String location) {
 
-        char rowLetter = location.toLowerCase().charAt(0);
+        char rowLetter = location.charAt(0);
         int row = -1;
 
         switch(rowLetter) {

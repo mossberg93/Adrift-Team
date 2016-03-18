@@ -53,7 +53,7 @@ public class MapView {
             for(int col = 0; col < locations[row].length; col++) {
                 String mapLoc =  MapControl.RowLetter.values()[row].name() + (col + 1);
 
-                if (mapLoc.equals(playerLoc)) {
+                if (mapLoc.equals(playerLoc.toUpperCase())) {
                     mapDisplay += "*" + mapLoc + "*" + colSeperator;
                 }
                 else {
