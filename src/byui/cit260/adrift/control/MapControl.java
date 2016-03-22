@@ -190,7 +190,7 @@ public class MapControl {
         return Character.getNumericValue(location.charAt(1)) - 1;
     }
 
-    static void setLocationVisited(String location) {
+    public static void setLocationVisited(String location) {
 
         Location[][] locations = AdriftTeam.getGame().getMap().getLocations();
         int row = MapControl.getRowFromLocation(location);
@@ -199,108 +199,6 @@ public class MapControl {
         //System.out.println("R " + row + " C " + col);
 
         locations[row][col].setVisited(true);
-    }
-
-    public static String getMapStats() {
-
-        int am = 0;
-        int ap = 0;
-        int cm = 0;
-        int dm = 0;
-        int ip = 0;
-        int im = 0;
-        int nb = 0;
-        int op = 0;
-        int um = 0;
-        int i = 0;
-        int[] mapItems = new int[25];
-
-        Location[][] locations = AdriftTeam.getGame().getMap().getLocations();
-        String results = null;
-
-        for (int row = 0; row < locations.length; row++) {
-
-            for(int col = 0; col < locations[row].length; col++) {
-
-                mapItems[i] = locations[row][col].getAmountRemaining();
-                i++;
-
-                if(!(locations[row][col].isVisited())) {
-
-                    String symbol = locations[row][col].getScene().getMapSymbol();
-
-                    switch(symbol) {
-                        case "AM" :
-                            am++;
-                            break;
-                        case "AP" :
-                            ap++;
-                            break;
-                        case "CM":
-                            cm++;
-                            break;
-                        case "DM":
-                            dm++;
-                            break;
-                        case "IF":
-                            ip++;
-                            break;
-                        case "IM":
-                            im++;
-                            break;
-                        case "NB":
-                            nb++;
-                            break;
-                        case "OP":
-                            op++;
-                            break;
-                        case "UM":
-                            um++;
-                            break;
-                    }
-                }
-            }
-        }
-
-        results = "\nThe following areas are still unexplored."
-            + "\nScene\t\tNumber Unexplored"
-            + "\n-----------------------------------------";
-
-        if (am > 0) {
-            results += "\nAluminum Mine\t" + am;
-        }
-
-        if (ap > 0) {
-            results += "\nAsteroid Plain\t" + ap;
-        }
-
-        if (cm > 0) {
-            results += "\nCopper Mine\t" + cm;
-        }
-
-        if (dm > 0) {
-            results += "\nDiamond Mine\t" + dm;
-        }
-
-        if (ip > 0) {
-            results += "\nIce Fields\t" + ip;
-        }
-
-        if (im > 0) {
-            results += "\nIron Mine\t" + im;
-        }
-
-        if (nb > 0) {
-            results += "\nNasa Base\t" + nb;
-        }
-
-        if (op > 0) {
-            results += "\nOutpost\t\t" + op;
-        }
-
-        results += "\n\nTotal items remaining: " + sum(mapItems);
-
-        return results;
     }
 
     public static int sum(int[] list) {

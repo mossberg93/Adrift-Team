@@ -55,11 +55,11 @@ public class PreMissionMenuView extends View{
                     done = true;
                     break;
                 default:
-                    System.out.println("Invalid selection: Try again");
+                    ErrorView.display(this.getClass().getName(), "Invalid selection: Try again");
                     break;
             }
         } catch (InventoryControlException ie) {
-            System.out.println(ie.getMessage());
+            ErrorView.display(this.getClass().getName(), ie.getMessage());
         }
 
         if (done) {

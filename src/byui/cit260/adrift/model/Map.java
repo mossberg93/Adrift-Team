@@ -5,6 +5,7 @@
  */
 package byui.cit260.adrift.model;
 
+import byui.cit260.adrift.view.ErrorView;
 import java.io.Serializable;
 import java.util.Arrays;
 
@@ -24,7 +25,7 @@ public class Map implements Serializable {
     public Map(int rowCount, int columnCount) {
 
         if (rowCount < 1 || columnCount < 1) {
-            System.out.println("The number of rows and clumns must be > zero");
+            ErrorView.display(this.getClass().getName(), "The number of rows and clumns must be > zero");
             return;
         }
 

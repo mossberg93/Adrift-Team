@@ -63,7 +63,7 @@ public class CalculateO2View extends View {
                     distance = MapControl.calculateDistance(mapLoc, mapDest);
                     valid = true;
                 } catch (MapControlException ex) {
-                    System.out.println(ex.getMessage());
+                    ErrorView.display(this.getClass().getName(), ex.getMessage());
                 }
 
                 break;
@@ -81,21 +81,21 @@ public class CalculateO2View extends View {
                     valid = true;
 
                 } else {
-                    System.out.println("Input invalid: Please enter Y or N");
+                    ErrorView.display(this.getClass().getName(), "Input invalid: Please enter Y or N");
                 }
                 break;
             case 3: // 3rd response
                 try {
                     amount =  Integer.parseInt(input);
                 } catch (NumberFormatException e){
-                    System.out.println("Input invalid: Enter a number.");
+                    ErrorView.display(this.getClass().getName(), "Input invalid: Enter a number.");
                 }
 
                 if (amount > 0) {
                    valid = true;
                 }
                 else {
-                    System.out.println("Input invalid: Enter a value > 0");
+                    ErrorView.display(this.getClass().getName(), "Input invalid: Enter a value > 0");
                 }
 
                 break;
@@ -107,7 +107,7 @@ public class CalculateO2View extends View {
                     buggy = (selection == 'y') ? 1 : 0;
                     done = true;
                 } else {
-                    System.out.println("Input invalid: Please enter Y or N");
+                    ErrorView.display(this.getClass().getName(), "Input invalid: Please enter Y or N");
                 }
                 break;
           }
@@ -141,7 +141,7 @@ public class CalculateO2View extends View {
 
             summary += "\nThis trip will require " + requiredO2 + " units of O2";
 
-            System.out.println(summary);
+            this.console.println(summary);
         }
 
         return done;

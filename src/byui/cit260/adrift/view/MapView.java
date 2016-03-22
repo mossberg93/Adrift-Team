@@ -9,12 +9,17 @@ import adrift.team.AdriftTeam;
 import byui.cit260.adrift.control.MapControl;
 import byui.cit260.adrift.model.Location;
 import byui.cit260.adrift.model.Map;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
 
 /**
  *
  * @author Philip
  */
 public class MapView {
+
+    protected final BufferedReader keyboard = AdriftTeam.getInFile();
+    protected final PrintWriter console = AdriftTeam.getOutFile();
 
     public MapView() {
 
@@ -77,7 +82,7 @@ public class MapView {
             mapDisplay += "\n" + rowSeperator;
         }
 
-        System.out.println(keyDisplay);
-        System.out.println(mapDisplay);
+        this.console.println(keyDisplay);
+        this.console.println(mapDisplay);
     }
 }

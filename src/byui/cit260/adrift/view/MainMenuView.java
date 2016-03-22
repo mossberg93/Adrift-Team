@@ -8,8 +8,6 @@ package byui.cit260.adrift.view;
 import adrift.team.AdriftTeam;
 import byui.cit260.adrift.control.*;
 import byui.cit260.adrift.exceptions.MapControlException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -56,7 +54,7 @@ public class MainMenuView extends View {
                 done = true;
                 break;
             default:
-                System.out.println("\nInvalid selection: Try again");
+                ErrorView.display(this.getClass().getName(), "\nInvalid selection: Try again");
                 break;
         }
 
@@ -68,7 +66,7 @@ public class MainMenuView extends View {
              // create a new game
              GameControl.createNewGame(AdriftTeam.getPlayer());
          } catch (MapControlException ex) {
-             System.out.println(ex.getMessage());
+             ErrorView.display(this.getClass().getName(), ex.getMessage());
          }
 
         // display the game menu
@@ -82,15 +80,31 @@ public class MainMenuView extends View {
     }
 
     private void saveGame() {
-        GameControl.saveGame();
 
-        System.out.println("\n*** The Game was successfully saved. ***");
+        this.console.println("\nEnter the filepath to save the game.");
+        String filePath = this.getInput();
+
+        try {
+            GameControl.saveGame(AdriftTeam.getGame(), filePath);
+            this.console.println("\nThe Game was successfully saved.");
+        } catch (Exception ex) {
+            ErrorView.display(this.getClass().getName(), ex.getMessage());
+        }
     }
 
     private void loadGame() {
-        GameControl.loadGame();
 
-        System.out.println("\n*** The Game loaded successfully ***");
+        this.console.println("\nEnter a save file location.");
+        String filePath = this.getInput();
+
+        try {
+            GameControl.loadGame(filePath);
+
+            this.console.println("\n*** The Game loaded successfully ***");
+
+        } catch (Exception ex) {
+            ErrorView.display(this.getClass().getName(), ex.getMessage());
+        }
 
         GameMenuView gameMenu = new GameMenuView();
         gameMenu.display();

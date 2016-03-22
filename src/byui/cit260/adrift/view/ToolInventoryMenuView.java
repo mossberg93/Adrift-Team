@@ -35,26 +35,26 @@ public class ToolInventoryMenuView extends View {
 
         switch(choice) {
            case 'd' : // equip mining drill
-                System.out.println("\nYou have equipped the mining drill.");
+                this.console.println("\nYou have equipped the mining drill.");
                 break;
            case 's' : //equip shovel
-               System.out.println("\nYou have equippped the shovel.");
+               this.console.println("\nYou have equippped the shovel.");
                break;
            case 'h' : // equip hammer
-               System.out.println("\nYou have equipped the hammer.");
+               this.console.println("\nYou have equipped the hammer.");
                break;
            case 't' : // oxygen tank
-               System.out.println("\nYou have equipped the oxygen tank.");
+               this.console.println("\nYou have equipped the oxygen tank.");
                break;
            case 'b' : // equip buggy
-               System.out.println("\nYou have entered the buggy.");
+               this.console.println("\nYou have entered the buggy.");
                break;
            case 'e' : // exit menu
-               System.out.println("\n Exited the menu");
+               this.console.println("\n Exited the menu");
                done = true;
                break;
             default:
-                System.out.println("\nInvalid selection: Try again");
+                ErrorView.display(this.getClass().getName(), "\nInvalid selection: Try again");
                 break;
         }
        return done;

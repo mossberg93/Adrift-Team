@@ -18,13 +18,15 @@ public class TestJava {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        int sum = 0;
+        //int sum = 0;
 
-        for(StealableItems si : StealableItems.values()) {
-            sum += si.getValue();
-        }
+        //for(StealableItems si : StealableItems.values()) {
+        //    sum += si.getValue();
+        //}
 
-        System.out.println("sum  = " + sum);
+        //System.out.println("sum  = " + sum);
+
+        printDir();
     }
 
     public enum StealableItems implements Serializable{
@@ -45,5 +47,11 @@ public class TestJava {
             return value;
         }
     }
+
+	public static void printDir() {
+		String currentDirectory;
+		currentDirectory = System.getProperty("user.dir");
+		System.out.println("Current working directory : "+currentDirectory);
+	}
 
 }

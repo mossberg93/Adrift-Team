@@ -28,7 +28,7 @@ public class HelpMenuView extends View{
             + "\n"
             + "\nEnter an option: ");
     }
-    
+
     private final String GAME_GOAL = "\n"
         + "You’ve crash landed on an Asteroid and need to harvest resources, fix"
         + " your ship, and return home.";
@@ -76,45 +76,45 @@ public class HelpMenuView extends View{
         + "\n"
         + "Select “Repair Ship” from the Game Menu while at your ship to repair "
         + "your ship.";
-    
+
 
     @Override
     public boolean doAction(String input) {
-        
+
         boolean done = false;
         char choice;
-        choice = input.toLowerCase().charAt(0);	
+        choice = input.toLowerCase().charAt(0);
 
         switch(choice) {
             case 'g': // display GAME_GOAL
-                System.out.println(this.GAME_GOAL);
+                this.console.println(this.GAME_GOAL);
                 break;
             case 'm': // display HOW_TO_MOVE
-                System.out.println(this.HOW_TO_MOVE);
+                this.console.println(this.HOW_TO_MOVE);
                 break;
             case 'f': // display CALCULATE_FUEL
-                System.out.println(this.CALCULATE_FUEL);
+                this.console.println(this.CALCULATE_FUEL);
                 break;
             case 'o': // display CALCULATE_O2
-                System.out.println(this.CALCULATE_O2);
+                this.console.println(this.CALCULATE_O2);
                 break;
             case 'y': // display CALCULATE_ENERGY
-                System.out.println(this.CALCULATE_ENERGY);
+                this.console.println(this.CALCULATE_ENERGY);
                 break;
             case 'h': // display HARVEST_RESOURCES
-                System.out.println(this.HARVEST_RESOURCES);
+                this.console.println(this.HARVEST_RESOURCES);
                 break;
             case 'r': // display REPAIR_SHIP
-                System.out.println(this.REPAIR_SHIP);
-                break;  
+                this.console.println(this.REPAIR_SHIP);
+                break;
             case 'e': // exit game
                 done = true;
-                break;                
+                break;
             default:
-                System.out.println("\n*** Invalid selection *** Try again");
+                ErrorView.display(this.getClass().getName(), "\n*** Invalid selection *** Try again");
                 break;
         }
-        
+
         return done;
     }
 }

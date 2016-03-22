@@ -18,7 +18,7 @@ public class CalculateEnergyView extends View {
 }
 
     private String getEnergyCalculation () {
-        System.out.println("You have successfully called the 'getEnergyCalculation' function");
+        this.console.println("You have successfully called the 'getEnergyCalculation' function");
         return "N";
     }
 

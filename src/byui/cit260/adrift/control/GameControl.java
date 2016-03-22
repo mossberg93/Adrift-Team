@@ -6,12 +6,20 @@
 package byui.cit260.adrift.control;
 
 import adrift.team.AdriftTeam;
+import byui.cit260.adrift.exceptions.GameControlException;
 import byui.cit260.adrift.exceptions.MapControlException;
 import byui.cit260.adrift.model.Game;
 import byui.cit260.adrift.model.InventoryItem;
 import byui.cit260.adrift.model.Map;
 import byui.cit260.adrift.model.Player;
 import byui.cit260.adrift.model.Ship;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 
 /**
  *
@@ -49,12 +57,35 @@ public class GameControl {
         moveToLocation("c3");
     }
 
-    public static void saveGame() {
-        System.out.println("\n*** saveGame stub function called ***");
+    public static void saveGame(Game game, String filePath)
+        throws GameControlException {
+
+        try(FileOutputStream fops = new FileOutputStream(filePath)) {
+            ObjectOutputStream output = new ObjectOutputStream(fops);
+
+            output.writeObject(game);
+        }
+        catch(IOException e) {
+            throw new GameControlException(e.getMessage());
+        }
     }
 
-    public static void loadGame() {
-        System.out.println("\n*** loadGame stub function called ***");
+    public static void loadGame(String filePath) throws GameControlException {
+        Game game = null;
+
+        try(FileInputStream fips = new FileInputStream(filePath)) {
+            ObjectInputStream input = new ObjectInputStream(fips);
+
+            game = (Game) input.readObject();
+        }
+        catch(FileNotFoundException fnfe) {
+            throw new GameControlException(fnfe.getMessage());
+        }
+        catch(Exception e) {
+            throw new GameControlException(e.getMessage());
+        }
+
+        AdriftTeam.setGame(game);
     }
 
     public static void moveToLocation (String location) throws MapControlException {
@@ -64,5 +95,15 @@ public class GameControl {
         AdriftTeam.getGame().getPlayer().setLocation(location);
         MapControl.setLocationVisited(location);
 
+    }
+
+    public static void saveReport(String report, String filePath)
+                throws GameControlException {
+
+        try(PrintWriter reportFile = new PrintWriter(filePath)) {
+            reportFile.println(report);
+        } catch(Exception e) {
+            throw new GameControlException(e.getMessage());
+        }
     }
 }

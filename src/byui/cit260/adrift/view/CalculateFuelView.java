@@ -18,7 +18,7 @@ public class CalculateFuelView extends View {
     }
 
     private String getFuelCaclulation() {
-        System.out.println("\n*** getFuelCalculation() function called ***");
+        this.console.println("\n*** getFuelCalculation() function called ***");
         return "N";
     }
 
@@ -26,7 +26,7 @@ public class CalculateFuelView extends View {
     public boolean doAction(String calculateFuelOption) {
         int destination = 0;
         int amount = 0;
-        System.out.println("\n*** doAction() function called ***");
+        this.console.println("\n*** doAction() function called ***");
         double totalfuel = RobotControl.calculateFuel(destination, amount);
         return true;
     }
