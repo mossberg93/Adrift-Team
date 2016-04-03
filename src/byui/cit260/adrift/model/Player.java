@@ -16,6 +16,7 @@ public class Player implements Serializable {
 
     private String name;
     private String location;
+    private InventoryItem[] inventory;
     private int energy;
     private int O2;
     private double bestTime;
@@ -30,13 +31,21 @@ public class Player implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public String getLocation() {
         return location;
     }
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public InventoryItem[] getInventory() {
+        return inventory;
+    }
+
+    public void setInvenotry(InventoryItem[] inventory) {
+        this.inventory = inventory;
     }
 
     public int getEnergy() {

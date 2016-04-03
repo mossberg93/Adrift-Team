@@ -18,7 +18,6 @@ public class Game implements Serializable{
     private Ship ship;
     private Map map;
     private Player player;
-    private InventoryItem[] inventory;
 
     public Game() {
     }
@@ -63,13 +62,16 @@ public class Game implements Serializable{
         this.player = player;
     }
 
-    public InventoryItem[] getInventory() {
-        return inventory;
+    private Buggy buggy;
+
+    public Buggy getBuggy() {
+        return buggy;
     }
 
-    public void setInventory(InventoryItem[] inventory) {
-        this.inventory = inventory;
+    public void setBuggy(Buggy buggy) {
+        this.buggy = buggy;
     }
+
 
     @Override
     public int hashCode() {

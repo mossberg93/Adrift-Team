@@ -8,7 +8,10 @@ package byui.cit260.adrift.view;
 import adrift.team.AdriftTeam;
 import byui.cit260.adrift.control.GameControl;
 import byui.cit260.adrift.control.MapControl;
+import byui.cit260.adrift.control.ShipControl;
+import byui.cit260.adrift.exceptions.GameControlException;
 import byui.cit260.adrift.exceptions.MapControlException;
+import byui.cit260.adrift.model.InventoryItem;
 import byui.cit260.adrift.model.Location;
 
 
@@ -27,18 +30,19 @@ public class GameMenuView extends View {
             + "\nM - Map"
             + "\nI - Inventory"
             + "\nS - Ship Status"
-            + "\nX - Explore Location"
+            //+ "\nX - Explore Location"
             + "\nV - Move"
-            + "\nG - Calculate Energy"
-            + "\nF - Calculate Fuel"
-            + "\nO - Calculate O2"
-            + "\nC - Craft Tools"
-            + "\nR - Harvest Resources"
-            + "\nD - Deliver Resource"
-            + "\nP - Repair Ship"
+            //+ "\nG - Calculate Energy"
+            //+ "\nF - Calculate Fuel"
+            + "\nT - Calculate Travel Costs"
+            + "\nC - Craft Resources"
+            //+ "\nR - Harvest Resources"
+            //+ "\nD - Deliver Resource"
+            + "\nR - Repair Ship"
             + "\nL - Launch Ship"
-            + "\nT - Generate Map Report"
+            + "\nP - Generate Map Report"
             + "\nU - Display Map Information"
+            + "\nX - CHEAT: Reduce ship damage by 1"
             + "\nH - Help Menu"
             + "\nE - Exit"
             + "\n---------------------------------------"
@@ -59,46 +63,46 @@ public class GameMenuView extends View {
                 mapView.displayMap();
                 break;
             case 'i':
-                this.console.println("Display inventory chosen");
+                this.displayInventory();
                 break;
             case 's':
-                this.console.println("Display ship chosen");
+                this.displalyShipDamage();
                 break;
             case 'x':
-                this.console.println("Explore location chosen");
+            //    this.console.println("Explore location chosen");
+                AdriftTeam.getGame().getShip().setDamage(AdriftTeam.getGame().getShip().getDamage() - 1);
                 break;
             case 'v':
                 this.movePlayer();
                 break;
-            case 'g':
-                this.console.println("Calc energy chosen");
-                break;
-            case 'f':
-                this.console.println("Calc fuel chosen");
-                CalculateFuelView calculateFuel = new CalculateFuelView();
-                calculateFuel.display();
-                break;
-            case 'o':
-                this.console.println("Calc O2 chosen");
-                CalculateO2View calculateO2 = new CalculateO2View();
-                calculateO2.display();
+            //case 'g':
+            //    this.console.println("Calc energy chosen");
+            //    break;
+            //case 'f':
+            //    CalculateFuelView calculateFuel = new CalculateFuelView();
+            //    calculateFuel.display();
+            //    break;
+            case 't':
+                CalculateTravelView calcTravel = new CalculateTravelView();
+                calcTravel.display();
                 break;
             case 'c':
-                this.console.println("craft tools chosen");
+                CraftMenuView craftMenu = new CraftMenuView();
+                craftMenu.display();
                 break;
+            //case 'r':
+            //    this.console.println("Harvest resources chosen");
+            //    break;
+            //case 'd':
+            //    this.console.println("Deliver resources chosen");
+            //    break;
             case 'r':
-                this.console.println("Harvest resources chosen");
-                break;
-            case 'd':
-                this.console.println("Deliver resources chosen");
-                break;
-            case 'p':
-                this.console.println("Repair ship chosen");
+                this.repairShip();
                 break;
             case 'l':
-                this.console.println("Launch ship chosen");
+                done = this.launchShip();
                 break;
-            case 't':
+            case 'g':
                 this.GenerateMapReport();
                 break;
             case 'u':
@@ -271,4 +275,61 @@ public class GameMenuView extends View {
 
         return results;
     }
+
+    private void displayInventory() {
+
+        String display;
+        InventoryItem[] inventory = AdriftTeam.getGame().getPlayer().getInventory();
+
+        display = "\n---------------------------------------";
+        display += String.format("\n%-20s %-10s       |", "Inventory Item", "Amount");
+        display += "\n---------------------------------------";
+
+        for(InventoryItem item : inventory) {
+
+            display += String.format("\n%-20s %-10s", item.getType(), item.getAmount());
+        }
+
+        this.console.println(display);
+    }
+
+    private void displalyShipDamage() {
+
+        int shipDamage = AdriftTeam.getGame().getShip().getDamage();
+
+        if (shipDamage > 0) {
+            this.console.println("\nYour ship is damaged in " + shipDamage
+                + " locations and will require " + shipDamage + " Repair Modules"
+                + " to be fixed.");
+        }
+        else {
+            this.console.println("\nYour ship is repaired and ready for space flight.");
+        }
+    }
+
+    private void repairShip() {
+
+        int repaired = ShipControl.repairShip();
+
+        this.console.println("\nYour ship was repaired in " + repaired + " locations.");
+
+        this.displalyShipDamage();
+    }
+
+    private boolean launchShip() {
+
+        boolean success = false;
+
+        try {
+            success = GameControl.launchShip();
+            this.console.println("\nCongratulations, you've successfully repaired your ship and are on your way home.");
+
+        } catch (GameControlException ex) {
+             ErrorView.display(this.getClass().getName(), ex.getMessage());
+        }
+
+        return success;
+    }
 }
+
+

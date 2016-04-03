@@ -10,65 +10,65 @@ package byui.cit260.adrift.control;
  * @author Philip
  */
 public class RobotControl {
-    
-    public static double calculateO2(int distance, int amount, int harvest, int buggy) {
-        
+
+    public static int calculateO2(int distance, int amount, int harvest, int buggy) {
+
         if (distance < 0) {
             return -1;
         }
-        
+
         if (amount < 0) {
             return -1;
         }
-        
+
         if (harvest != 0 && harvest != 1) {
             return -1;
         }
-        
+
         if (buggy != 0 && buggy != 1) {
             return -1;
         }
-        
-        double totalO2 = distance + harvest + (amount * distance) - (amount * buggy);
-        
+
+        int totalO2 = distance + harvest + (amount * distance) - (amount * buggy);
+
         return totalO2;
     }
 
-    public static double calculateEnergy(int distance, int amount, int harvest, int buggy) {
-        
+    public static int calculateEnergy(int distance, int amount, int harvest, int buggy) {
+
         if (distance < 0) {
             return -1;
         }
-        
+
         if (amount < 0) {
             return -1;
         }
-        
+
         if (harvest != 0 && harvest != 1) {
             return -1;
         }
-        
+
         if (buggy != 0 && buggy != 1) {
             return -1;
         }
-        
-        double totalEnergy = distance + harvest + (amount * distance) - (amount * buggy);
-        
+
+        int totalEnergy = distance + harvest + (amount * distance) - (amount * buggy);
+
         return totalEnergy;
     }
-    
-  public static double calculateFuel(int destination, int amount) {
-      
+
+  public static int calculateFuel(int destination, int amount) {
+
       if (destination < 0) {
           return -1;
       }
-      
+
       if (amount < 0) {
           return -1;
       }
-      
-      double totalFuel = destination + (amount * destination);
-      
+
+      int totalFuel = destination + (amount * destination);
+
       return totalFuel;
-  }  
+  }
 }

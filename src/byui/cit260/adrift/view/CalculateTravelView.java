@@ -8,42 +8,49 @@ package byui.cit260.adrift.view;
 import adrift.team.AdriftTeam;
 import byui.cit260.adrift.control.MapControl;
 import byui.cit260.adrift.control.RobotControl;
-import byui.cit260.adrift.control.SpaceSuitControl;
 import byui.cit260.adrift.exceptions.MapControlException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author Philip
  */
-public class CalculateO2View extends View {
+public class CalculateTravelView extends View {
 
     private int distance = 0;
     private int amount = 0;
     private int harvest = 0;
     private int buggy = 0;
+    private int o2Amount = 0;
+    private int energyAmount = 0;
+    private int fuelAmount = 0;
     private String mapLoc = null;
     private int question = 1;
     String message;
     String[] dialogue = {
         "Enter your destination coordinates.",
+        "Will you be taking the buggy?"
+            + "\nY - Yes"
+            + "\nN - No",
         "Will you be harvesting resources?"
             + "\nY - Yes"
             + "\nN - No",
-        "How much resources will you be harvesting?",
-        "Will you be taking the buggy?"
-            + "\nY - Yes"
-            + "\nN - No"
+        "How much resources will you be harvesting?"
     };
 
-    public CalculateO2View() {
+    public CalculateTravelView() {
         super();
 
         mapLoc = AdriftTeam.getGame().getPlayer().getLocation();
-        int O2Amount = SpaceSuitControl.getO2Amount();
-        message = "You're at map coordinates " + mapLoc + " and have "
-                + O2Amount + " units of O2. " + dialogue[0];
+        o2Amount = AdriftTeam.getGame().getPlayer().getO2();
+        energyAmount = AdriftTeam.getGame().getPlayer().getEnergy();
+        fuelAmount = AdriftTeam.getGame().getBuggy().getFuel();
+
+        message = "You're at map coordinates " + mapLoc + " and have: "
+            + "\n" + o2Amount + " liters of oxygen"
+            + "\n" + energyAmount + " calories of energy"
+            + "\n" + fuelAmount + " liters of fuel."
+            + "\n-------------------------------------\n"
+            + dialogue[0];
         super.setDisplayMessage(message);
     }
 
@@ -55,7 +62,7 @@ public class CalculateO2View extends View {
         char selection = input.toLowerCase().charAt(0);
 
         switch(question) {
-            case 1:
+            case 1: // Enter your destination coordinates.
 
                 try {
                     MapControl.validateLocation(input.toLowerCase());
@@ -67,24 +74,40 @@ public class CalculateO2View extends View {
                 }
 
                 break;
-            case 2: // 2nd response
-
-                if (selection == 'y' || selection == 'n') {
-                    if (selection == 'y') {
-                        harvest = 1;
-                     }
-                    else {
-                        harvest = 0;
-                        question++; // need to skip to the next question
-                    }
-
-                    valid = true;
-
-                } else {
-                    ErrorView.display(this.getClass().getName(), "Input invalid: Please enter Y or N");
+            case 2: // Will you be taking the buggy?
+                switch (selection) {
+                    case 'y':
+                        buggy = 1;
+                        valid = true;
+                        break;
+                    case 'n':
+                        buggy = 0;
+                        done = true;
+                        break;
+                    default:
+                        ErrorView.display(this.getClass().getName(), "Input invalid: Please enter Y or N");
+                        break;
                 }
+
                 break;
-            case 3: // 3rd response
+            case 3: // Will you be harvesting resources?
+                switch (selection) {
+                    case 'y':
+                        harvest = 1;
+                        valid = true;
+                        break;
+                    case 'n':
+                        harvest = 0;
+                        done = true;
+                        break;
+                    default:
+                        ErrorView.display(this.getClass().getName(), "Input invalid: Please enter Y or N");
+                        break;
+                }
+
+                break;
+            case 4: // How much resources will you be harvesting?
+
                 try {
                     amount =  Integer.parseInt(input);
                 } catch (NumberFormatException e){
@@ -92,34 +115,20 @@ public class CalculateO2View extends View {
                 }
 
                 if (amount > 0) {
-                   valid = true;
+                    done = true;
                 }
                 else {
                     ErrorView.display(this.getClass().getName(), "Input invalid: Enter a value > 0");
                 }
 
                 break;
-            case 4: // 4th response
-
-
-                if (selection == 'y' || selection == 'n') {
-                    // ternary expression if selection is y buggy is 1 otherwise it's 0
-                    buggy = (selection == 'y') ? 1 : 0;
-                    done = true;
-                } else {
-                    ErrorView.display(this.getClass().getName(), "Input invalid: Please enter Y or N");
-                }
-                break;
           }
 
-        if (valid) {
-            message = dialogue[question]; // get the next part of the dialogue
-            super.setDisplayMessage(message); // update the display message
-            question++; // advance to the next question
-        }
-
         if (done) {
-            double requiredO2 = RobotControl.calculateO2(distance, amount, harvest, buggy);
+            int requiredO2 = RobotControl.calculateO2(distance, amount, harvest, buggy);
+            int requiredEnergy = RobotControl.calculateEnergy(distance, amount, harvest, buggy);
+            int requiredFuel = RobotControl.calculateFuel(distance, amount);
+
             String summary = "\nSummary"
                 + "\n-------------------------------------"
                 + "\nTravel distance: " + distance;
@@ -139,9 +148,20 @@ public class CalculateO2View extends View {
                 summary += "\nBuggy: N";
             }
 
-            summary += "\nThis trip will require " + requiredO2 + " units of O2";
+            summary += "\nThis trip will require: "
+                + "\n" + requiredO2 + " liters of oxygen"
+                + "\n" + requiredEnergy + " calories of energy"
+                + "\n" + requiredFuel + " liters of fuel.";
 
             this.console.println(summary);
+
+            return done;
+        }
+
+        if (valid) {
+            message = dialogue[question]; // get the next part of the dialogue
+            super.setDisplayMessage(message); // update the display message
+            question++; // advance to the next question
         }
 
         return done;

@@ -14,7 +14,7 @@ import java.util.Objects;
  */
 public class Ship implements Serializable {
     private String description;
-    private double damage;
+    private int damage;
 
     public Ship() {
         this.description = "\nThis is your trusy space shipped.  It is damaged"
@@ -30,11 +30,11 @@ public class Ship implements Serializable {
         this.description = description;
     }
 
-    public double getDamage() {
+    public int getDamage() {
         return damage;
     }
 
-    public void setDamage(double damage) {
+    public void setDamage(int damage) {
         this.damage = damage;
     }
 

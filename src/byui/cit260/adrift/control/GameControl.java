@@ -8,6 +8,7 @@ package byui.cit260.adrift.control;
 import adrift.team.AdriftTeam;
 import byui.cit260.adrift.exceptions.GameControlException;
 import byui.cit260.adrift.exceptions.MapControlException;
+import byui.cit260.adrift.model.Buggy;
 import byui.cit260.adrift.model.Game;
 import byui.cit260.adrift.model.InventoryItem;
 import byui.cit260.adrift.model.Map;
@@ -43,14 +44,17 @@ public class GameControl {
         game.setPlayer(player);
 
         Ship ship = new Ship();
+        ship.setDamage((int)(Math.random() * 3 + 1));
         game.setShip(ship);
+
+        Buggy buggy = new Buggy();
+        game.setBuggy(buggy);
 
         Map map = MapControl.createMap();
         game.setMap(map);
 
-        InventoryItem[] inventory;
-        inventory = InventoryControl.initilizeInventory(); //Initilize inventory
-        game.setInventory(inventory);
+        InventoryItem[] inventory = InventoryControl.initilizeInventory();
+        player.setInvenotry(inventory);
 
         AdriftTeam.setGame(game);
 
@@ -105,5 +109,18 @@ public class GameControl {
         } catch(Exception e) {
             throw new GameControlException(e.getMessage());
         }
+    }
+
+    public static boolean launchShip() throws GameControlException {
+
+        boolean launched = false;
+
+        if (AdriftTeam.getGame().getShip().getDamage() == 0) {
+            launched = true;
+        } else {
+            throw new GameControlException("Your ship is sill damaged and cannot be launched.");
+        }
+
+        return launched;
     }
 }

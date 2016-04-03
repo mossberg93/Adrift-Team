@@ -63,10 +63,10 @@ public class MainMenuView extends View {
 
     private void startNewGame() {
          try {
-             // create a new game
-             GameControl.createNewGame(AdriftTeam.getPlayer());
+            // create a new game
+            GameControl.createNewGame(AdriftTeam.getPlayer());
          } catch (MapControlException ex) {
-             ErrorView.display(this.getClass().getName(), ex.getMessage());
+            ErrorView.display(this.getClass().getName(), ex.getMessage());
          }
 
         // display the game menu

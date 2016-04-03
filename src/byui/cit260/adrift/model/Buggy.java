@@ -16,7 +16,7 @@ public class Buggy implements Serializable {
 
     // class instance variables
     private String description;
-    private double fuel;
+    private int fuel;
 
     public Buggy() {
     }
@@ -29,11 +29,11 @@ public class Buggy implements Serializable {
         this.description = description;
     }
 
-    public double getFuel() {
+    public int getFuel() {
         return fuel;
     }
 
-    public void setFuel(double fuel) {
+    public void setFuel(int fuel) {
         this.fuel = fuel;
     }
 

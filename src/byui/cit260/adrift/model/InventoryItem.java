@@ -13,43 +13,43 @@ import java.util.Objects;
  * @author mossb
  */
 public class InventoryItem implements Serializable {
-    private String inventoryType;
-    private int quantityInStock;
-    private int requiredAmount;
+    private String type;
+    private int amount;
+    private int maxAmount;
 
     public InventoryItem() {
     }
 
     public String getType() {
-        return inventoryType;
+        return type;
     }
 
-    public void setType(String inventoryType) {
-        this.inventoryType = inventoryType;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public int getQuantityInStock() {
-        return quantityInStock;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setQuantityInStock(int quantityInStock) {
-        this.quantityInStock = quantityInStock;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
-    public int getRequiredAmount() {
-        return requiredAmount;
+    public int getMaxAmount() {
+        return maxAmount;
     }
 
-    public void setRequiredAmount(int requiredAmount) {
-        this.requiredAmount = requiredAmount;
+    public void setMaxAmount(int maxAmount) {
+        this.maxAmount = maxAmount;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 73 * hash + Objects.hashCode(this.inventoryType);
-        hash = 73 * hash + this.quantityInStock;
-        hash = 73 * hash + this.requiredAmount;
+        hash = 73 * hash + Objects.hashCode(this.type);
+        hash = 73 * hash + this.amount;
+        hash = 73 * hash + this.maxAmount;
         return hash;
     }
 
@@ -65,13 +65,13 @@ public class InventoryItem implements Serializable {
             return false;
         }
         final InventoryItem other = (InventoryItem) obj;
-        if (this.quantityInStock != other.quantityInStock) {
+        if (this.amount != other.amount) {
             return false;
         }
-        if (this.requiredAmount != other.requiredAmount) {
+        if (this.maxAmount != other.maxAmount) {
             return false;
         }
-        if (!Objects.equals(this.inventoryType, other.inventoryType)) {
+        if (!Objects.equals(this.type, other.type)) {
             return false;
         }
         return true;
@@ -79,7 +79,7 @@ public class InventoryItem implements Serializable {
 
     @Override
     public String toString() {
-        return "Inventory{" + "inventoryType=" + inventoryType + ", quantityInStock=" + quantityInStock + ", requiredAmount=" + requiredAmount + '}';
+        return "Inventory{" + "inventoryType=" + type + ", quantityInStock=" + amount + ", requiredAmount=" + maxAmount + '}';
     }
 
 
